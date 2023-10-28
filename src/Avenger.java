@@ -1,4 +1,4 @@
-public class Avenger implements Comparable<Avenger> {
+public class Avenger extends SLL<Avenger> implements Comparable<Avenger> {
 
 	private String heroName;
 	private String heroAlias;
@@ -6,6 +6,13 @@ public class Avenger implements Comparable<Avenger> {
 	private int nameFreq;
 	private int aliasFreq;
 	private int performerFreq;
+	private int topN = 4;
+	private int totalwordCount;
+	public String[][] avengerRoster = { { "captainamerica", "rogers", "evans" }, { "ironman", "stark", "downey" },
+			{ "blackwidow", "romanoff", "johansson" }, { "hulk", "banner", "ruffalo" },
+			{ "blackpanther", "tchalla", "boseman" }, { "thor", "odinson", "hemsworth" },
+			{ "hawkeye", "barton", "renner" }, { "warmachine", "rhodes", "cheadle" },
+			{ "spiderman", "parker", "holland" }, { "wintersoldier", "barnes", "stan" } };
 
 	// Constructor
 	public Avenger(String alias, String name, String actor) {
@@ -16,6 +23,8 @@ public class Avenger implements Comparable<Avenger> {
 		aliasFreq = 0;
 		performerFreq = 0;
 	}
+	//Default Constructor
+	public Avenger() {}
 
 	// Getters
 	public String getName() {

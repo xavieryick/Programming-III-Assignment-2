@@ -1,9 +1,9 @@
 
-public class SLL<T extends Comparable<T>>{
+public class Node<T extends Comparable<T>>{
 	private T data;
-	private SLL<T> next;
+	private Node<T> next;
 
-	public SLL(T d) {
+	public Node(T d) {
 		data = d;
 		next = null;
 	}
@@ -16,11 +16,11 @@ public class SLL<T extends Comparable<T>>{
 		data = o;
 	}
 
-	public SLL<T> getNext() {
+	public Node<T> getNext() {
 		return next;
 	}
 
-	public void setNext(SLL<T> n) {
+	public void setNext(Node<T> n) {
 		next = n;
 	}
 
