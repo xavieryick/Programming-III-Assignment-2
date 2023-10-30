@@ -24,6 +24,17 @@ public class A2 extends SLL {
 	Avenger[] possibleAvengers = { cptAmerica, ironMan, blackWidow, hulk, blackPan, thor, hawkEye, warMachine,
 			spiderMan, winterSoldier };
 	
+	private Node<Avenger> captainAmericaNode = new Node<Avenger>(cptAmerica);
+	private Node<Avenger> ironManNode = new Node<Avenger>(ironMan);
+	private Node<Avenger> blackWidowNode = new Node<Avenger>(blackWidow);
+	private Node<Avenger> hulkNode = new Node<Avenger>(hulk);
+	private Node<Avenger> blackPanNode = new Node<Avenger>(blackPan);
+	private Node<Avenger> thorNode = new Node<Avenger>(thor);
+	private Node<Avenger> hawkEyeNode = new Node<Avenger>(hawkEye);
+	private Node<Avenger> warMachineNode = new Node<Avenger>(warMachine);
+	private Node<Avenger> spiderManNode = new Node<Avenger>(spiderMan);
+	private Node<Avenger> winterSoldierNode = new Node<Avenger>(winterSoldier);
+
 	SLL<Avenger> avengersList = new SLL<>();
 	int totalWordCount = 0;
 	int topN = 4;
@@ -36,6 +47,8 @@ public class A2 extends SLL {
 	public void run() {
 		readInput(avengersList);
 		printResults(totalWordCount, avengersList);
+		System.out.println(avengersList);
+		System.out.println(avengersList.getHead().toString());
 	}
 
 	public void readInput(SLL<Avenger> avengersList) {
@@ -45,7 +58,7 @@ public class A2 extends SLL {
 			word = word.trim().toLowerCase().split("'")[0].replaceAll("[^\\\\sa-zA-Z]", "");
 			if (word.length() != 0) {
 				totalWordCount++;
-				matchIncrement(word, avengersList, possibleAvengers);
+				matchIncrement(word, avengersList);
 			}
 		}
 		input.close();
@@ -54,36 +67,129 @@ public class A2 extends SLL {
 	/*
 	 * Matching and incrementing each Avenger's counts
 	 */
-	
-	// I THINK THERES SOMETHING WRONG WITH THIS ONE
-	/*
-	 * implement something along the lines of 
-	 * if name == alias/name/actor
-	 * 		checkList(avenger) {check if exists}
-	 * 		incrememntCount {adds to appropriate counter}
-	 * check this for every avenger?
-	 */
-	public void matchIncrement(String word, SLL<Avenger> list, Avenger[] avs) {	
-		Node<Avenger> iterator = list.getHead();
-		if (iterator == null) {
-			checkList(list, iterator);
+	public void matchIncrement(String word, SLL<Avenger> list) {	
+		if (avengerRoster[0][0].equals(word) || avengerRoster[0][1].equals(word) || avengerRoster[0][2].equals(word)) {
+			checkList(list, captainAmericaNode);
+			if (avengerRoster[0][0].equals(word)) {
+				captainAmericaNode.getData().incrementAliasCount();
+			}
+			else if (avengerRoster[0][1].equals(word)) {
+				captainAmericaNode.getData().incrementNameCount();
+			}
+			else {
+				captainAmericaNode.getData().incrementActorCount();
+			}
+		}
+		else if (avengerRoster[1][0].equals(word) || avengerRoster[1][1].equals(word) || avengerRoster[1][2].equals(word)) {
+			checkList(list, ironManNode);
+			if (avengerRoster[1][0].equals(word)) {
+				ironManNode.getData().incrementAliasCount();
+			}
+			else if (avengerRoster[1][1].equals(word)) {
+				ironManNode.getData().incrementNameCount();
+			}
+			else {
+				ironManNode.getData().incrementActorCount();
+			}
+		}
+		else if (avengerRoster[2][0].equals(word) || avengerRoster[2][1].equals(word) || avengerRoster[2][2].equals(word)) {
+			checkList(list, blackWidowNode);
+			if (avengerRoster[2][0].equals(word)) {
+				blackWidowNode.getData().incrementAliasCount();
+			}
+			else if (avengerRoster[2][1].equals(word)) {
+				blackWidowNode.getData().incrementNameCount();
+			}
+			else {
+				blackWidowNode.getData().incrementActorCount();
+			}
+		}
+		else if (avengerRoster[3][0].equals(word) || avengerRoster[3][1].equals(word) || avengerRoster[3][2].equals(word)) {
+			checkList(list, hulkNode);
+			if (avengerRoster[3][0].equals(word)) {
+				hulkNode.getData().incrementAliasCount();
+			}
+			else if (avengerRoster[3][1].equals(word)) {
+				hulkNode.getData().incrementNameCount();
+			}
+			else {
+				hulkNode.getData().incrementActorCount();
+			}
+		}
+		else if (avengerRoster[4][0].equals(word) || avengerRoster[4][1].equals(word) || avengerRoster[4][2].equals(word)) {
+			checkList(list, blackPanNode);
+			if (avengerRoster[4][0].equals(word)) {
+				blackPanNode.getData().incrementAliasCount();
+			}
+			else if (avengerRoster[4][1].equals(word)) {
+				blackPanNode.getData().incrementNameCount();
+			}
+			else {
+				blackPanNode.getData().incrementActorCount();
+			}
+		}
+		else if (avengerRoster[5][0].equals(word) || avengerRoster[5][1].equals(word) || avengerRoster[5][2].equals(word)) {
+			checkList(list, thorNode);
+			if (avengerRoster[5][0].equals(word)) {
+				thorNode.getData().incrementAliasCount();
+			}
+			else if (avengerRoster[5][1].equals(word)) {
+				thorNode.getData().incrementNameCount();
+			}
+			else {
+				thorNode.getData().incrementActorCount();
+			}
+		}
+		else if (avengerRoster[6][0].equals(word) || avengerRoster[6][1].equals(word) || avengerRoster[6][2].equals(word)) {
+			checkList(list, hawkEyeNode);
+			if (avengerRoster[6][0].equals(word)) {
+				hawkEyeNode.getData().incrementAliasCount();
+			}
+			else if (avengerRoster[6][1].equals(word)) {
+				hawkEyeNode.getData().incrementNameCount();
+			}
+			else {
+				hawkEyeNode.getData().incrementActorCount();
+			}
+		}
+		else if (avengerRoster[7][0].equals(word) || avengerRoster[7][1].equals(word) || avengerRoster[7][2].equals(word)) {
+			checkList(list, warMachineNode);
+			if (avengerRoster[7][0].equals(word)) {
+				warMachineNode.getData().incrementAliasCount();
+			}
+			else if (avengerRoster[7][1].equals(word)) {
+				warMachineNode.getData().incrementNameCount();
+			}
+			else {
+				warMachineNode.getData().incrementActorCount();
+			}
+		}
+		else if (avengerRoster[8][0].equals(word) || avengerRoster[8][1].equals(word) || avengerRoster[8][2].equals(word)) {
+			checkList(list, spiderManNode);
+			if (avengerRoster[8][0].equals(word)) {
+				spiderManNode.getData().incrementAliasCount();
+			}
+			else if (avengerRoster[8][1].equals(word)) {
+				spiderManNode.getData().incrementNameCount();
+			}
+			else {
+				spiderManNode.getData().incrementActorCount();
+			}
+		}
+		else if (avengerRoster[9][0].equals(word) || avengerRoster[9][1].equals(word) || avengerRoster[9][2].equals(word)) {
+			checkList(list, winterSoldierNode);
+			if (avengerRoster[9][0].equals(word)) {
+				winterSoldierNode.getData().incrementAliasCount();
+			}
+			else if (avengerRoster[9][1].equals(word)) {
+				winterSoldierNode.getData().incrementNameCount();
+			}
+			else {
+				winterSoldierNode.getData().incrementActorCount();
+			}
 		}
 		else {
-			while (iterator != null) {
-				if (word.equals(iterator.getData().getAlias())) {
-					iterator.getData().incrementAliasCount();
-					checkList(list, iterator);
-				}
-				else if (word.equals(iterator.getData().getName())) {
-					iterator.getData().incrementNameCount();
-					checkList(list, iterator);
-				}
-				else if (word.equals(iterator.getData().getActor())) {
-					iterator.getData().incrementActorCount();
-					checkList(list, iterator);
-				}
-				iterator = iterator.getNext();
-			}
+			return;
 		}
 	}
 
@@ -261,8 +367,12 @@ public class A2 extends SLL {
 		}
 		
 		Node<Avenger> printer = head;
+		// zero
+		if (printer == null ) {
+			System.out.println("List is empty");
+		}
 		// one
-		if (printer.getNext() == null) {
+		else if (printer.getNext() == null) {
 			System.out.println(printer.toString());
 		}
 		// two
@@ -299,8 +409,12 @@ public class A2 extends SLL {
 		}
 		
 		Node<Avenger> printer = head;
+		// zero
+		if (printer == null ) {
+			System.out.println("List is empty");
+		}
 		// one
-		if (printer.getNext() == null) {
+		else if (printer.getNext() == null) {
 			System.out.println(printer.toString());
 		}
 		// two
