@@ -45,10 +45,10 @@ public class A2 extends SLL {
 	}
 
 	public void run() {
+		head = null;
+		tail = null;
 		readInput(avengersList);
 		printResults(totalWordCount, avengersList);
-		System.out.println(avengersList);
-		System.out.println(avengersList.getHead().toString());
 	}
 
 	public void readInput(SLL<Avenger> avengersList) {
@@ -194,10 +194,23 @@ public class A2 extends SLL {
 	}
 
 	// adds to given list if given avenger isnt in it
-	public void checkList(SLL<Avenger> list, Node<Avenger> av) {
-		if (!list.contains(av)) {
-			list.addTail(av);
+	public SLL<Avenger> checkList(SLL<Avenger> list, Node<Avenger> av) {	
+		Node<Avenger> iterator = list.getHead();
+		// checks if iterator name is equal to given av name
+		while (iterator.getNext() != null) {
+			if (iterator.getData().getName().equals(av.getData().getName())) {
+				return list;
+			}
+			else {
+				iterator = iterator.getNext();
+			}
 		}
+		// if not found in list
+		if (iterator.getNext() == null) {
+			list.addTail(av);
+			return list;
+		}
+		return list;
 	}
 	
 	public void addInOrderTotal(SLL<Avenger> list, Node<Avenger> av) {
