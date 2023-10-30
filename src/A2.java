@@ -26,6 +26,7 @@ public class A2 extends SLL {
 	
 	SLL<Avenger> avengersList = new SLL<>();
 	int totalWordCount = 0;
+	int topN = 4;
 	
 	public static void main(String[] args) {
 		A2 manager = new A2();
@@ -243,7 +244,7 @@ public class A2 extends SLL {
 	}
 	
 	// finds top four, prints
-	public void printTopFourAvengers(SLL<Avenger> totalList) {
+	public void printTopNAvengers(SLL<Avenger> totalList) {
 		Node<Avenger> iterator = totalList.getHead();
 		SLL<Avenger> list = new SLL<>();
 		// iterates through totalList, adds everything to list in order
@@ -251,15 +252,37 @@ public class A2 extends SLL {
 			addInOrderTotal(list, iterator);
 			iterator = iterator.getNext();
 		}
-		// print the top four
-		System.out.println(list.getHead());
-		System.out.println(list.getHead().getNext());
-		System.out.println(list.getHead().getNext().getNext());
-		System.out.println(list.getHead().getNext().getNext().getNext());
+		
+		Node<Avenger> printer = head;
+		// one
+		if (printer.getNext() == null) {
+			System.out.println(printer.toString());
+		}
+		// two
+		else if (printer.getNext().getNext() == null) {
+			for (int counter = 0; counter < 2; counter++) {
+				System.out.println(printer.toString());
+				printer = printer.getNext();
+			}
+		}
+		// three
+		else if (printer.getNext().getNext().getNext() == null) {
+			for (int counter = 0; counter < 3; counter++) {
+				System.out.println(printer.toString());
+				printer = printer.getNext();
+			}
+		}
+		// four+
+		else {
+			for (int counter = 0; counter < topN; counter++) {
+				System.out.println(printer.toString());
+				printer = printer.getNext();
+			}
+		}
 	}
 	
 	// finds top four, prints
-	public void printTopFourPerformers(SLL<Avenger> totalList) {
+	public void printTopNPerformers(SLL<Avenger> totalList) {
 		Node<Avenger> iterator = totalList.getHead();
 		SLL<Avenger> list = new SLL<>();
 		// iterates through totalList, adds everything to list in order
@@ -267,11 +290,33 @@ public class A2 extends SLL {
 			addInOrderActor(list, iterator);
 			iterator = iterator.getNext();
 		}
-		// print the top four
-		System.out.println(list.getHead());
-		System.out.println(list.getHead().getNext());
-		System.out.println(list.getHead().getNext().getNext());
-		System.out.println(list.getHead().getNext().getNext().getNext());
+		
+		Node<Avenger> printer = head;
+		// one
+		if (printer.getNext() == null) {
+			System.out.println(printer.toString());
+		}
+		// two
+		else if (printer.getNext().getNext() == null) {
+			for (int counter = 0; counter < 2; counter++) {
+				System.out.println(printer.toString());
+				printer = printer.getNext();
+			}
+		}
+		// three
+		else if (printer.getNext().getNext().getNext() == null) {
+			for (int counter = 0; counter < 3; counter++) {
+				System.out.println(printer.toString());
+				printer = printer.getNext();
+			}
+		}
+		// four+
+		else {
+			for (int counter = 0; counter < topN; counter++) {
+				System.out.println(printer.toString());
+				printer = printer.getNext();
+			}
+		}
 	}
 	
 	// sorts, prints alphabetical
@@ -291,8 +336,8 @@ public class A2 extends SLL {
 	private void printResults(int totalWordCount, SLL<Avenger> list) {
 		System.out.println(totalWordCount);
 		printInOrder(list);
-//		printTopFourAvengers(avengersList);
-//		printTopFourPerformers(avengersList);
-//		printAlphabetical(avengersList);
+//		printTopNAvengers(list);
+//		printTopNPerformers(list);
+//		printAlphabetical(list);
 	}
 }
