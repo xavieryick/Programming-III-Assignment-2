@@ -56,6 +56,13 @@ public class A2 extends SLL {
 	 */
 	
 	// I THINK THERES SOMETHING WRONG WITH THIS ONE
+	/*
+	 * implement something along the lines of 
+	 * if name == alias/name/actor
+	 * 		checkList(avenger) {check if exists}
+	 * 		incrememntCount {adds to appropriate counter}
+	 * check this for every avenger?
+	 */
 	public void matchIncrement(String word, SLL<Avenger> list, Avenger[] avs) {	
 		Node<Avenger> iterator = list.getHead();
 		if (iterator == null) {
