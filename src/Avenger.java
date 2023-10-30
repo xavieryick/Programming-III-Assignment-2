@@ -49,6 +49,11 @@ public class Avenger extends SLL<Avenger> implements Comparable<Avenger> {
 	public int getActorCount() {
 		return performerFreq;
 	}
+	
+	public int getTotalCount() {
+		return nameFreq + aliasFreq + performerFreq;
+	}
+	
 	//Incrementing the Counters
 	public void incrementNameCount() {
 		nameFreq++;
@@ -83,6 +88,8 @@ public class Avenger extends SLL<Avenger> implements Comparable<Avenger> {
 		int orderAlphAlias = this.heroAlias.compareTo(a.getAlias());
 		return orderAlphAlias;
 	}
+	
+
 	@Override
 	public String toString() {
 		return  heroAlias + " aka " + heroName
