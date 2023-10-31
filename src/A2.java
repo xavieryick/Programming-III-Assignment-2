@@ -49,6 +49,8 @@ public class A2 extends SLL {
 		tail = null;
 		readInput(avengersList);
 		printResults(totalWordCount, avengersList);
+//		System.out.println(head.toString());
+//		System.out.println(tail.toString());
 	}
 
 	public void readInput(SLL<Avenger> avengersList) {
@@ -68,7 +70,7 @@ public class A2 extends SLL {
 	 * Matching and incrementing each Avenger's counts
 	 */
 	public void matchIncrement(String word, SLL<Avenger> list) {	
-		if (avengerRoster[0][0].equals(word) || avengerRoster[0][1].equals(word) || avengerRoster[0][2].equals(word)) {
+		if (word.equals(avengerRoster[0][0]) || word.equals(avengerRoster[0][1]) || word.equals(avengerRoster[0][2])) {
 			checkList(list, captainAmericaNode);
 			if (avengerRoster[0][0].equals(word)) {
 				captainAmericaNode.getData().incrementAliasCount();
@@ -80,7 +82,7 @@ public class A2 extends SLL {
 				captainAmericaNode.getData().incrementActorCount();
 			}
 		}
-		else if (avengerRoster[1][0].equals(word) || avengerRoster[1][1].equals(word) || avengerRoster[1][2].equals(word)) {
+		else if (word.equals(avengerRoster[1][0]) || word.equals(avengerRoster[1][1]) || word.equals(avengerRoster[1][2])) {
 			checkList(list, ironManNode);
 			if (avengerRoster[1][0].equals(word)) {
 				ironManNode.getData().incrementAliasCount();
@@ -92,7 +94,7 @@ public class A2 extends SLL {
 				ironManNode.getData().incrementActorCount();
 			}
 		}
-		else if (avengerRoster[2][0].equals(word) || avengerRoster[2][1].equals(word) || avengerRoster[2][2].equals(word)) {
+		else if (word.equals(avengerRoster[2][0]) || word.equals(avengerRoster[2][1]) || word.equals(avengerRoster[2][2])) {
 			checkList(list, blackWidowNode);
 			if (avengerRoster[2][0].equals(word)) {
 				blackWidowNode.getData().incrementAliasCount();
@@ -104,7 +106,7 @@ public class A2 extends SLL {
 				blackWidowNode.getData().incrementActorCount();
 			}
 		}
-		else if (avengerRoster[3][0].equals(word) || avengerRoster[3][1].equals(word) || avengerRoster[3][2].equals(word)) {
+		else if (word.equals(avengerRoster[3][0]) || word.equals(avengerRoster[3][1]) || word.equals(avengerRoster[3][2])) {
 			checkList(list, hulkNode);
 			if (avengerRoster[3][0].equals(word)) {
 				hulkNode.getData().incrementAliasCount();
@@ -116,7 +118,7 @@ public class A2 extends SLL {
 				hulkNode.getData().incrementActorCount();
 			}
 		}
-		else if (avengerRoster[4][0].equals(word) || avengerRoster[4][1].equals(word) || avengerRoster[4][2].equals(word)) {
+		else if (word.equals(avengerRoster[4][0]) || word.equals(avengerRoster[4][1]) || word.equals(avengerRoster[4][2])) {
 			checkList(list, blackPanNode);
 			if (avengerRoster[4][0].equals(word)) {
 				blackPanNode.getData().incrementAliasCount();
@@ -128,7 +130,7 @@ public class A2 extends SLL {
 				blackPanNode.getData().incrementActorCount();
 			}
 		}
-		else if (avengerRoster[5][0].equals(word) || avengerRoster[5][1].equals(word) || avengerRoster[5][2].equals(word)) {
+		else if (word.equals(avengerRoster[5][0]) || word.equals(avengerRoster[5][1]) || word.equals(avengerRoster[5][2])) {
 			checkList(list, thorNode);
 			if (avengerRoster[5][0].equals(word)) {
 				thorNode.getData().incrementAliasCount();
@@ -140,7 +142,7 @@ public class A2 extends SLL {
 				thorNode.getData().incrementActorCount();
 			}
 		}
-		else if (avengerRoster[6][0].equals(word) || avengerRoster[6][1].equals(word) || avengerRoster[6][2].equals(word)) {
+		else if (word.equals(avengerRoster[6][0]) || word.equals(avengerRoster[6][1]) || word.equals(avengerRoster[6][2])) {
 			checkList(list, hawkEyeNode);
 			if (avengerRoster[6][0].equals(word)) {
 				hawkEyeNode.getData().incrementAliasCount();
@@ -152,7 +154,7 @@ public class A2 extends SLL {
 				hawkEyeNode.getData().incrementActorCount();
 			}
 		}
-		else if (avengerRoster[7][0].equals(word) || avengerRoster[7][1].equals(word) || avengerRoster[7][2].equals(word)) {
+		else if (word.equals(avengerRoster[7][0]) || word.equals(avengerRoster[7][1]) || word.equals(avengerRoster[7][2])) {
 			checkList(list, warMachineNode);
 			if (avengerRoster[7][0].equals(word)) {
 				warMachineNode.getData().incrementAliasCount();
@@ -164,7 +166,7 @@ public class A2 extends SLL {
 				warMachineNode.getData().incrementActorCount();
 			}
 		}
-		else if (avengerRoster[8][0].equals(word) || avengerRoster[8][1].equals(word) || avengerRoster[8][2].equals(word)) {
+		else if (word.equals(avengerRoster[8][0]) || word.equals(avengerRoster[8][1]) || word.equals(avengerRoster[8][2])) {
 			checkList(list, spiderManNode);
 			if (avengerRoster[8][0].equals(word)) {
 				spiderManNode.getData().incrementAliasCount();
@@ -176,7 +178,7 @@ public class A2 extends SLL {
 				spiderManNode.getData().incrementActorCount();
 			}
 		}
-		else if (avengerRoster[9][0].equals(word) || avengerRoster[9][1].equals(word) || avengerRoster[9][2].equals(word)) {
+		else if (word.equals(avengerRoster[9][0]) || word.equals(avengerRoster[9][1]) || word.equals(avengerRoster[9][2])) {
 			checkList(list, winterSoldierNode);
 			if (avengerRoster[9][0].equals(word)) {
 				winterSoldierNode.getData().incrementAliasCount();
@@ -193,24 +195,27 @@ public class A2 extends SLL {
 		}
 	}
 
+	// fuck this one still broken
 	// adds to given list if given avenger isnt in it
-	public SLL<Avenger> checkList(SLL<Avenger> list, Node<Avenger> av) {	
+	public void checkList(SLL<Avenger> list, Node<Avenger> av) {	
 		Node<Avenger> iterator = list.getHead();
 		// checks if iterator name is equal to given av name
-		while (iterator.getNext() != null) {
-			if (iterator.getData().getName().equals(av.getData().getName())) {
-				return list;
-			}
-			else {
-				iterator = iterator.getNext();
+		if (iterator == null) {
+			System.out.println("bitch");
+		}
+		else {
+			while (iterator.getNext() != null) {
+				if (iterator.getData().getName().equals(av.getData().getName())) {
+					break;
+				}
+				else {
+					iterator = iterator.getNext();
+					if (iterator.getNext() == null) {
+						list.addTail(av);
+					}
+				}
 			}
 		}
-		// if not found in list
-		if (iterator.getNext() == null) {
-			list.addTail(av);
-			return list;
-		}
-		return list;
 	}
 	
 	public void addInOrderTotal(SLL<Avenger> list, Node<Avenger> av) {

@@ -89,7 +89,6 @@ public class Avenger extends SLL<Avenger> implements Comparable<Avenger> {
 		return orderAlphAlias;
 	}
 	
-
 	@Override
 	public String toString() {
 		return  heroAlias + " aka " + heroName
