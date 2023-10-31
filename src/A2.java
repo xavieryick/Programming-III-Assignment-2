@@ -208,38 +208,39 @@ public class A2 extends SLL {
 	}
 	
 	// change to return list
-	public void addInOrderTotal(Node<Avenger> head, Node<Avenger> av) {
+	public SLL<Avenger> addInOrderTotal(SLL<Avenger> list, Node<Avenger> av) {
+		SLL<Avenger> subList = list;
 		// check if 0
-		if (head == null) {
-			head = av;
+		if (list.getHead() == null) {
+			subList.addHead(av);
 		}
 		// check if 1
-		else if (head.getNext() == null) {
-			int headTotal = head.getData().getTotalCount();
+		else if (list.getHead().getNext() == null) {
+			int headTotal = list.getHead().getData().getTotalCount();
 			int avTotal = av.getData().getTotalCount();
 			
 			// av count > head count
 			if (avTotal > headTotal) {
-				head = av;
+				subList.addHead(av);
 			}
 			// av count < head count
 			else if (avTotal < headTotal) {
-				tail = av;
+				subList.addTail(av);
 			}
 			// av count == head count
 			else {
 				// if avActor > headActor
 				if (av.getData().compareTo(head.getData()) > 0) {
-					head = av;
+					subList.addHead(av);
 				}
 				// if avActor < headActor
 				else if (av.getData().compareTo(head.getData()) < 0) {
-					tail = av;
+					subList.addTail(av);
 				}
 			}
 		}
-		else {
-			Node<Avenger> iterator = head;
+		else { // fix this
+			Node<Avenger> iterator = subList.getHead();
 			Node<Avenger> next = iterator.getNext();
 			Node<Avenger> nextNext = iterator.getNext().getNext();
 			int resultNext = iterator.getData().getTotalCount() - next.getData().getTotalCount();
@@ -255,6 +256,7 @@ public class A2 extends SLL {
 			next.setNext(iterator);
 			iterator.setNext(nextNext);
 		}
+		return subList;
 	}
 	
 	//change to return list
@@ -370,45 +372,47 @@ public class A2 extends SLL {
 	// finds top four, prints
 	public void printTopNAvengers(SLL<Avenger> list) {
 		Node<Avenger> iterator = list.getHead();
+		SLL<Avenger> subList;
 //		SLL<Avenger> list2 = new SLL<>();
 		// iterates through totalList, adds everything to list in order
-		if (iterator == null ) {
+		if (iterator == null) {
 			System.out.println("Error");
 		}
 		else {
-			while (iterator.getNext() != null) {
-				addInOrderTotal(head, iterator);
+			while (iterator != null) {
+				subList = addInOrderTotal(list, iterator);
 				iterator = iterator.getNext();
-			}
-			
-			Node<Avenger> printer = head;
-			// zero
-			if (printer == null ) {
-				System.out.println("List is empty");
-			}
-			// one
-			else if (printer.getNext() == null) {
-				System.out.println(printer.toString());
-			}
-			// two
-			else if (printer.getNext().getNext() == null) {
-				for (int counter = 0; counter < 2; counter++) {
-					System.out.println(printer.toString());
-					printer = printer.getNext();
-				}
-			}
-			// three
-			else if (printer.getNext().getNext().getNext() == null) {
-				for (int counter = 0; counter < 3; counter++) {
-					System.out.println(printer.toString());
-					printer = printer.getNext();
-				}
-			}
-			// four+
-			else {
-				for (int counter = 0; counter < topN; counter++) {
-					System.out.println(printer.toString());
-					printer = printer.getNext();
+				if (iterator.getNext() == null) {
+					Node<Avenger> printer = subList.getHead();
+					// zero
+					if (printer == null) {
+						System.out.println("List is empty");
+					}
+					// one
+					else if (printer.getNext() == null) {
+						System.out.println(printer.toString());
+					}
+					// two
+					else if (printer.getNext().getNext() == null) {
+						for (int counter = 0; counter < 2; counter++) {
+							System.out.println(printer.toString());
+							printer = printer.getNext();
+						}
+					}
+					// three
+					else if (printer.getNext().getNext().getNext() == null) {
+						for (int counter = 0; counter < 3; counter++) {
+							System.out.println(printer.toString());
+							printer = printer.getNext();
+						}
+					}
+					// four+
+					else {
+						for (int counter = 0; counter < topN; counter++) {
+							System.out.println(printer.toString());
+							printer = printer.getNext();
+						}
+					}
 				}
 			}
 		}
@@ -484,7 +488,7 @@ public class A2 extends SLL {
 		System.out.println(totalWordCount);
 		System.out.println(list.size());
 		printInOrder(list);
-//		printTopNAvengers(list);
+		printTopNAvengers(list);
 //		printTopNPerformers(head);
 //		printAlphabetical(head);
 	}
