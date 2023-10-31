@@ -66,11 +66,11 @@ public class SLL<T extends Comparable<T>>{
 	 * 
 	 * @return head value, null if list is empty
 	 */
-	public T getHead() {
+	public Node <T> getHead() {
 		if (head == null)
 			return null;
 		else
-			return head.getData();
+			return head;
 	}
 
 	/**
@@ -135,6 +135,10 @@ public class SLL<T extends Comparable<T>>{
 	public Node<T> delete(Node<T> key) {
 		return deleting(key);
 	}
+	
+	public boolean exist(T key) {
+		return exists(key);
+	}
 
 				// Private methods
 
@@ -179,6 +183,20 @@ public class SLL<T extends Comparable<T>>{
 	/*
 	 * Finding a node using a key
 	 */
+	private boolean exists(T key) {
+		Node<T> curr = head;
+		while (curr != null) {
+			if (curr == key) {
+				return true;
+			} else {
+				curr = curr.getNext();
+			}
+		}
+		return false;
+	}
+	/*
+	 * Finding a node using a key
+	 */
 	private Node<T> finding(Node<T> key) {
 		Node<T> curr = head;
 		while (curr != null) {
@@ -193,7 +211,7 @@ public class SLL<T extends Comparable<T>>{
 	/*
 	 * Deleting a node identified with a key
 	 */
-	private Node<T> deleting(Node<T> key) {
+	private Node<T> deleting(Node <T> key) {
 		// implement delete
 		if (finding(key) != null) { //Does key match any of the Strings in the List of Nodes?
 			Node<T> nodeToDelete = finding(key);	
@@ -211,26 +229,4 @@ public class SLL<T extends Comparable<T>>{
 		}
 	}
 	
-//	public void addInOrder(T str) {
-//		Node<T> s = new Node<>(str);
-//		addInOrder(s);
-//	}
-//
-//	private void addInOrder(Node<T> n) {
-//		// implement addInOrde
-//		n.setNext(null);
-//		if (Empty() || comparing(n, head) <= 0) {
-//			addHead(n);
-//		} else if (comparing(n, tail) >= 0) {
-//			addTail(n);
-//		} else if (comparing(n, head) > 0) {
-//			Node<String> curr = head;
-//			while (curr.getNext() != null && comparing(n, curr.getNext()) > 0) {
-//				curr = curr.getNext();
-//			}
-//			n.setNext(curr.getNext());
-//			curr.setNext(n);
-//			;
-//		}
-//	}
 }

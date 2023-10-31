@@ -6,8 +6,6 @@ public class Avenger extends SLL<Avenger> implements Comparable<Avenger> {
 	private int nameFreq;
 	private int aliasFreq;
 	private int performerFreq;
-	private int topN = 4;
-	private int totalwordCount;
 	public String[][] avengerRoster = { { "captainamerica", "rogers", "evans" }, { "ironman", "stark", "downey" },
 			{ "blackwidow", "romanoff", "johansson" }, { "hulk", "banner", "ruffalo" },
 			{ "blackpanther", "tchalla", "boseman" }, { "thor", "odinson", "hemsworth" },
@@ -93,5 +91,25 @@ public class Avenger extends SLL<Avenger> implements Comparable<Avenger> {
 				+ " + p: " + performerFreq
 				+ ")" + " time(s)";
 	}
+	public void addToOrder(SLL<Avenger> list) {
+		addInOrder(list);
+	}
 
+	private void addInOrder(SLL<Avenger> list) {
+		// implement addInOrde
+		n.setNext(null);
+		if (Empty() || compareTo(n, list.getHead()) <= 0) {
+			addHead(n);
+		} else if (comparing(n, tail) >= 0) {
+			addTail(n);
+		} else if (comparing(n, head) > 0) {
+			Node<String> curr = head;
+			while (curr.getNext() != null && comparing(n, curr.getNext()) > 0) {
+				curr = curr.getNext();
+			}
+			n.setNext(curr.getNext());
+			curr.setNext(n);
+			;
+		}
+	}
 }
