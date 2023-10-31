@@ -1,26 +1,26 @@
 
-public class Node<T extends Comparable<T>>{
-	private T data;
-	private Node<T> next;
+public class Node<Avenger extends Comparable<Avenger>>{
+	private Avenger data;
+	private Node<Avenger> next;
 
-	public Node(T d) {
+	public Node(Avenger d) {
 		data = d;
 		next = null;
 	}
 
-	public T getData() {
+	public Avenger getData() {
 		return data;
 	}
 
-	public void setData(T o) {
+	public void setData(Avenger o) {
 		data = o;
 	}
 
-	public Node<T> getNext() {
+	public Node<Avenger> getNext() {
 		return next;
 	}
 
-	public void setNext(Node<T> n) {
+	public void setNext(Node<Avenger> n) {
 		next = n;
 	}
 

@@ -41,7 +41,7 @@ public class A2 extends SLL {
 	
 	public static void main(String[] args) {
 		A2 manager = new A2();
-		manager.run();
+		manager.run();		
 	}
 
 	public void run() {
@@ -49,8 +49,11 @@ public class A2 extends SLL {
 		tail = null;
 		readInput(avengersList);
 		printResults(totalWordCount, avengersList);
-//		System.out.println(head.toString());
-//		System.out.println(tail.toString());
+		
+		head = blackPanNode;
+		System.out.println(head);
+		head.setNext(ironManNode);
+		System.out.println(head.getNext());
 	}
 
 	public void readInput(SLL<Avenger> avengersList) {
@@ -71,7 +74,7 @@ public class A2 extends SLL {
 	 */
 	public void matchIncrement(String word, SLL<Avenger> list) {	
 		if (word.equals(avengerRoster[0][0]) || word.equals(avengerRoster[0][1]) || word.equals(avengerRoster[0][2])) {
-			checkList(list, captainAmericaNode);
+			checkList(head, captainAmericaNode);
 			if (avengerRoster[0][0].equals(word)) {
 				captainAmericaNode.getData().incrementAliasCount();
 			}
@@ -83,7 +86,7 @@ public class A2 extends SLL {
 			}
 		}
 		else if (word.equals(avengerRoster[1][0]) || word.equals(avengerRoster[1][1]) || word.equals(avengerRoster[1][2])) {
-			checkList(list, ironManNode);
+			checkList(head, ironManNode);
 			if (avengerRoster[1][0].equals(word)) {
 				ironManNode.getData().incrementAliasCount();
 			}
@@ -95,7 +98,7 @@ public class A2 extends SLL {
 			}
 		}
 		else if (word.equals(avengerRoster[2][0]) || word.equals(avengerRoster[2][1]) || word.equals(avengerRoster[2][2])) {
-			checkList(list, blackWidowNode);
+			checkList(head, blackWidowNode);
 			if (avengerRoster[2][0].equals(word)) {
 				blackWidowNode.getData().incrementAliasCount();
 			}
@@ -107,7 +110,7 @@ public class A2 extends SLL {
 			}
 		}
 		else if (word.equals(avengerRoster[3][0]) || word.equals(avengerRoster[3][1]) || word.equals(avengerRoster[3][2])) {
-			checkList(list, hulkNode);
+			checkList(head, hulkNode);
 			if (avengerRoster[3][0].equals(word)) {
 				hulkNode.getData().incrementAliasCount();
 			}
@@ -119,7 +122,7 @@ public class A2 extends SLL {
 			}
 		}
 		else if (word.equals(avengerRoster[4][0]) || word.equals(avengerRoster[4][1]) || word.equals(avengerRoster[4][2])) {
-			checkList(list, blackPanNode);
+			checkList(head, blackPanNode);
 			if (avengerRoster[4][0].equals(word)) {
 				blackPanNode.getData().incrementAliasCount();
 			}
@@ -131,7 +134,7 @@ public class A2 extends SLL {
 			}
 		}
 		else if (word.equals(avengerRoster[5][0]) || word.equals(avengerRoster[5][1]) || word.equals(avengerRoster[5][2])) {
-			checkList(list, thorNode);
+			checkList(head, thorNode);
 			if (avengerRoster[5][0].equals(word)) {
 				thorNode.getData().incrementAliasCount();
 			}
@@ -143,7 +146,7 @@ public class A2 extends SLL {
 			}
 		}
 		else if (word.equals(avengerRoster[6][0]) || word.equals(avengerRoster[6][1]) || word.equals(avengerRoster[6][2])) {
-			checkList(list, hawkEyeNode);
+			checkList(head, hawkEyeNode);
 			if (avengerRoster[6][0].equals(word)) {
 				hawkEyeNode.getData().incrementAliasCount();
 			}
@@ -155,7 +158,7 @@ public class A2 extends SLL {
 			}
 		}
 		else if (word.equals(avengerRoster[7][0]) || word.equals(avengerRoster[7][1]) || word.equals(avengerRoster[7][2])) {
-			checkList(list, warMachineNode);
+			checkList(head, warMachineNode);
 			if (avengerRoster[7][0].equals(word)) {
 				warMachineNode.getData().incrementAliasCount();
 			}
@@ -167,7 +170,7 @@ public class A2 extends SLL {
 			}
 		}
 		else if (word.equals(avengerRoster[8][0]) || word.equals(avengerRoster[8][1]) || word.equals(avengerRoster[8][2])) {
-			checkList(list, spiderManNode);
+			checkList(head, spiderManNode);
 			if (avengerRoster[8][0].equals(word)) {
 				spiderManNode.getData().incrementAliasCount();
 			}
@@ -179,7 +182,7 @@ public class A2 extends SLL {
 			}
 		}
 		else if (word.equals(avengerRoster[9][0]) || word.equals(avengerRoster[9][1]) || word.equals(avengerRoster[9][2])) {
-			checkList(list, winterSoldierNode);
+			checkList(head, winterSoldierNode);
 			if (avengerRoster[9][0].equals(word)) {
 				winterSoldierNode.getData().incrementAliasCount();
 			}
@@ -197,11 +200,11 @@ public class A2 extends SLL {
 
 	// fuck this one still broken
 	// adds to given list if given avenger isnt in it
-	public void checkList(SLL<Avenger> list, Node<Avenger> av) {	
-		Node<Avenger> iterator = list.getHead();
+	public void checkList(Node<Avenger> head, Node<Avenger> av) {	
+		Node<Avenger> iterator = head;
 		// checks if iterator name is equal to given av name
 		if (iterator == null) {
-			System.out.println("bitch");
+			
 		}
 		else {
 			while (iterator.getNext() != null) {
@@ -211,40 +214,40 @@ public class A2 extends SLL {
 				else {
 					iterator = iterator.getNext();
 					if (iterator.getNext() == null) {
-						list.addTail(av);
+						iterator.setNext(av);
 					}
 				}
 			}
 		}
 	}
 	
-	public void addInOrderTotal(SLL<Avenger> list, Node<Avenger> av) {
+	public void addInOrderTotal(Node<Avenger> head, Node<Avenger> av) {
 		// check if 0
-		if (list.getHead() == null) {
-			list.addHead(av);
+		if (head == null) {
+			head = av;
 		}
 		// check if 1
-		else if (list.getHead().getNext() == null) {
-			int headTotal = list.getHead().getData().getTotalCount();
+		else if (head.getNext() == null) {
+			int headTotal = head.getData().getTotalCount();
 			int avTotal = av.getData().getTotalCount();
 			
 			// av count > head count
 			if (avTotal > headTotal) {
-				addHead(av);
+				head = av;
 			}
 			// av count < head count
 			else if (avTotal < headTotal) {
-				addTail(av);
+				tail = av;
 			}
 			// av count == head count
 			else {
 				// if avActor > headActor
 				if (av.getData().compareTo(head.getData()) > 0) {
-					addHead(av);
+					head = av;
 				}
 				// if avActor < headActor
 				else if (av.getData().compareTo(head.getData()) < 0) {
-					addTail(av);
+					tail = av;
 				}
 			}
 		}
@@ -380,7 +383,7 @@ public class A2 extends SLL {
 		SLL<Avenger> list = new SLL<>();
 		// iterates through totalList, adds everything to list in order
 		while (iterator.getNext() != null) {
-			addInOrderTotal(list, iterator);
+			addInOrderTotal(head, iterator);
 			iterator = iterator.getNext();
 		}
 		
