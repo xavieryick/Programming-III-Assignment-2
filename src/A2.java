@@ -50,8 +50,6 @@ public class A2 extends SLL {
 		tail = avengersList.getTail();
 		avengersList = readInput(avengersList);
 		printResults(totalWordCount, head, avengersList);
-//		System.out.println(head.toString()); 
-//		System.out.println(tail.toString());
 	}
 
 	public SLL<Avenger> readInput(SLL<Avenger> avengersList) {
@@ -200,24 +198,6 @@ public class A2 extends SLL {
 
 	// adds to given list if given avenger isnt in it
 	public SLL<Avenger> checkList(SLL<Avenger> list, Node<Avenger> av) {	
-//		Node<Avenger> iterator = head;
-//		// checks if iterator name is equal to given av name
-//		if (iterator == null) {
-//			
-//		}
-//		else {
-//			while (iterator.getNext() != null) {
-//				if (iterator.getData().getName().equals(av.getData().getName())) {
-//					break;
-//				}
-//				else {
-//					iterator = iterator.getNext();
-//					if (iterator.getNext() == null) {
-//						iterator.setNext(av);
-//					}
-//				}
-//			}
-//		}
 		if (list.contains(av)) {
 			return list;
 		}
@@ -376,11 +356,11 @@ public class A2 extends SLL {
 		 Node<Avenger> iterator = list.getHead();
 		 
 		 // ok current code doesnt trigger this!
-		 if (iterator == null ) {
+		 if (iterator == null) {
 			 System.out.println("Error");
 		 }
 		 else {
-			 while (iterator.getNext() != null) {
+			 while (iterator != null) {
 				 System.out.println(iterator.toString());
 				 iterator = iterator.getNext();
 			 }
@@ -388,9 +368,9 @@ public class A2 extends SLL {
 	}
 	
 	// finds top four, prints
-	public void printTopNAvengers(Node<Avenger> head) {
-		Node<Avenger> iterator = head;
-		SLL<Avenger> list = new SLL<>();
+	public void printTopNAvengers(SLL<Avenger> list) {
+		Node<Avenger> iterator = list.getHead();
+//		SLL<Avenger> list2 = new SLL<>();
 		// iterates through totalList, adds everything to list in order
 		if (iterator == null ) {
 			System.out.println("Error");
@@ -502,8 +482,9 @@ public class A2 extends SLL {
 
 	private void printResults(int totalWordCount, Node<Avenger> head, SLL<Avenger> list) {
 		System.out.println(totalWordCount);
+		System.out.println(list.size());
 		printInOrder(list);
-//		printTopNAvengers(head);
+//		printTopNAvengers(list);
 //		printTopNPerformers(head);
 //		printAlphabetical(head);
 	}

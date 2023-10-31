@@ -1,59 +1,74 @@
 
 public class SLL<Avenger extends Comparable<Avenger>>{
 	private Node<Avenger> head, tail;
-	private int size;
 
 	public SLL() {
-		head = null;
-		tail = null;
-		size = 0;
+		this.head = null;
+		this.tail = null;
 	}
 
 	public boolean isEmpty() {
-		if (size == 0) return true;
-		else return false;
+		if (this.head == null) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	public void addHead(Node<Avenger> av) {
 		if (isEmpty()) {
-			head = av;
-			tail = av;
+			this.head = av;
+			this.tail = av;
 		}
 		else {
-			av.setNext(head);
-			head = av;
+			av.setNext(this.head);
+			this.head = av;
 		}
 	}
 	
 	public void addTail(Node<Avenger> av) {
 		if (isEmpty()) {
-			addHead(av);
+			this.head = av;
+			this.tail = av;
 		}
 		else {
-			tail.setNext(av);
-			tail = av;
+			this.tail.setNext(av);
+			this.tail = av;
 		}
 	}
 	
 	public Node<Avenger> getHead() {
-		return head;
+		return this.head;
 	}
 	
 	public Node<Avenger> getTail() {
-		return tail;
+		return this.tail;
 	}
 
 	public boolean contains(Node<Avenger> a) {
+		boolean status;
+		Node<Avenger> iterator = this.head;
 		if (isEmpty()) {
-			return false;
+			status = false;
+			return status; 
 		}
 		else {
-			if (this.contains(a)) {
-				return true;
+			while (iterator != null) {
+				if (iterator.equals(a)) {
+					status = true;
+					return status;
+				}
+				else {
+					iterator = iterator.getNext();
+				}
 			}
-			else {
-				return false;
+			if (iterator == null ) {
+				status = false;
+				return status;
 			}
+			status = false;
+			return status;
 		}
 	}
 
@@ -62,4 +77,14 @@ public class SLL<Avenger extends Comparable<Avenger>>{
 		return diff;
 	}
 	
+	
+	public int size() {
+		Node<Avenger> counter = this.head;
+		int count = 0;
+		while (counter != null) {
+			count ++;
+			counter = counter.getNext();
+		}
+		return count;
+	}
 }

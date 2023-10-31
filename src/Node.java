@@ -25,6 +25,11 @@ public class Node<Avenger>{
 	}
 
 	public String toString() {
-		return "Node: " + getData().toString();
+		if (this.equals(null)){
+			return "null";
+		}
+		else {
+			return getData().toString();
+		}
 	}
 }
