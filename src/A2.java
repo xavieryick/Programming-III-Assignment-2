@@ -240,6 +240,16 @@ public class A2 extends SLL {
 			}
 		}
 		else { // fix this
+			
+			/*
+			 * if list of 1-2-3-4-5, 4 will only have resultNext, and 5 will have none
+			 * 1) resultNext, resultNextNext
+			 * 2) resultNext, resultNextNext
+			 * 3) resultNext, resultNextNext
+			 * 4) resultNext, n/a
+			 * 5) n/a, n/a
+			 * fix to cover second last and last nodes
+			 */
 			Node<Avenger> iterator = subList.getHead();
 			Node<Avenger> next = iterator.getNext();
 			Node<Avenger> nextNext = iterator.getNext().getNext();

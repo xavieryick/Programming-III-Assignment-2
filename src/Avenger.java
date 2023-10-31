@@ -1,4 +1,4 @@
-public class Avenger extends SLL<Avenger> implements Comparable<Avenger> {
+public class Avenger extends SLL<Avenger> implements Comparable<Avenger>{
 
 	private String heroName;
 	private String heroAlias;
