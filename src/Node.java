@@ -1,5 +1,5 @@
 
-public class Node<Avenger extends Comparable<Avenger>>{
+public class Node<Avenger>{
 	private Avenger data;
 	private Node<Avenger> next;
 
