@@ -35,7 +35,7 @@ public class A2 extends Avenger {
 	public void run() {
 		readInput();
 		printResults();
-		
+
 	}
 
 	// Constructor
@@ -87,25 +87,25 @@ public class A2 extends Avenger {
 	 * avenger to the avengerList
 	 */
 	public void checkListForMentions(Avenger a) {
-		if(avengersByMentions == null) {
+		if (avengersByMentions == null) {
 			addHead(a);
-		}else if(exist(a) == true){
+		} else if (exist(a) == true) {
 			return;
-		}else {
+		} else {
 			addTail(a);
 		}
 	}
-	
+
 	public void printResults() {
 		System.out.println("Total number of words: " + totalwordCount);
 		System.out.println("Number of Avengers Mentioned: " + avengersByMentions.size());
 		System.out.println();
-		
+
 		// Print all Avengers ordered by appearance
 		System.out.println("All avengers in the order they appeared in the input stream:");
 		printList(avengersByMentions);
 		System.out.println();
-		
+
 		System.out.println("Top " + topN + " most popular avengers:"); // Order by most popular Avengers
 		Collections.sort(av, new Comparator<Avenger>() {
 			@Override
@@ -124,7 +124,6 @@ public class A2 extends Avenger {
 		printingTopN(av);
 		System.out.println();
 
-		
 		System.out.println("Top " + topN + " most popular performers:");
 		Collections.sort(av, new Comparator<Avenger>() { // Order by most popular performers/actors
 			@Override
@@ -146,39 +145,35 @@ public class A2 extends Avenger {
 		});
 		printingTopN(av);
 		System.out.println();
-		
+
 		// Print all ordered by alias alphabetically
-		System.out.println("All mentioned avengers in alphabetical order:"); 
-		alphabeticaListing(avengersByMentions);
+		System.out.println("All mentioned avengers in alphabetical order:");
+		alphabeticaListing(avengersByMentions, );
 		printList(alphabeticalOrderList);
 		System.out.println();
 	}
-	
+
 	/**
 	 * 
 	 */
-	public void alphabeticaListing(SLL<Avenger> list) {
-		SLL<Avenger> curr = list;
-		SLL<Avenger> curr2 = alphabeticalOrderList;
-		for(int i = 0; i < curr.size(); i++) {
-			if(curr != null) {
-				curr2.addHead(curr.get(i));
-			}
-		}
+	public void alphabeticaListing(SLL<Avenger> list, SLL<Avenger> target) {
+		target = list;
+		addInOrder(target);
 	}
-	
+
 	/**
 	 * 
 	 */
 	public void printList(SLL<Avenger> linkedList) {
 		SLL<Avenger> curr = linkedList;
-		for(int i = 0; i < curr.size(); i++) {
+		for (int i = 0; i < curr.size(); i++) {
 			curr.get(i).toString();
 		}
 	}
-	
+
 	/**
 	 * Print TopN based on the size of the list of avengers mentioned
+	 * 
 	 * @param av List of mentioned Avengers
 	 */
 	public void printingTopN(SLL<Avenger> av) {

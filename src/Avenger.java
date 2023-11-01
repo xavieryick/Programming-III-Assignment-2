@@ -91,25 +91,39 @@ public class Avenger extends SLL<Avenger> implements Comparable<Avenger> {
 				+ " + p: " + performerFreq
 				+ ")" + " time(s)";
 	}
-	public void addToOrder(SLL<Avenger> list) {
-		addInOrder(list);
+	public void addInOrder(SLL<Avenger> target) {
+		addInOrderActor(target);
 	}
 
-	private void addInOrder(SLL<Avenger> list) {
-		// implement addInOrde
-		n.setNext(null);
-		if (Empty() || compareTo(n, list.getHead()) <= 0) {
-			addHead(n);
-		} else if (comparing(n, tail) >= 0) {
-			addTail(n);
-		} else if (comparing(n, head) > 0) {
-			Node<String> curr = head;
-			while (curr.getNext() != null && comparing(n, curr.getNext()) > 0) {
-				curr = curr.getNext();
-			}
-			n.setNext(curr.getNext());
-			curr.setNext(n);
-			;
+	private void addInOrderActor(SLL<Avenger> target) {
+		if(target == null || target.getNext() == null) {
+			return;
+		}else if(target.size() > 1) {
+			SLL<Avenger> curr = target.getNext();
+			SLL<Avenger> chosenNode = curr.deleteHead();
+			while(chosenNode != null) {
+				while(curr != null) {
+					if(comparing(chosenNode,curr) < 1) {
+						curr = curr.getNext();
+					}else if(comparing(chosenNode,curr) > 1) {
+						chosenNode.setNext(curr.getNext());
+						curr.setNext(chosenNode);
+						
+					}
+				}
+			}	
+		}
+	}
+	
+	
+	public int comparing(SLL<Avenger> n1, SLL<Avenger> n2) {
+		Node<Avenger> node1= n1.getData();
+		Node<Avenger> node2= n2.getData();
+		
+		if (n1 == null || n2 == null) {
+			return 0;
+		} else {
+			return node1.getData().getAlias().compareTo(node2.getData().getAlias());
 		}
 	}
 }

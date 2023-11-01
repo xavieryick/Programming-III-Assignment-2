@@ -145,7 +145,7 @@ public class SLL<T extends Comparable<T>>{
 	/*
 	 * Add a new Node to the head of the list.
 	 */
-	private void addHead(Node<T> n) {
+	public void addHead(Node<T> n) {
 		if (head == null) // empty list
 		{
 			head = n;
@@ -156,6 +156,19 @@ public class SLL<T extends Comparable<T>>{
 		}
 		size++;
 	}
+	
+	public SLL<T> getNext(){
+		return getNextNode();
+	}
+	
+	public Node<T> getData(){
+		return getData();
+	}
+	public void setNext(SLL <Avenger> n) {
+		Node<T> av = new Node<T>(n);
+		setNext(av);
+	}
+	
 	/*
 	 * Add a new Node to the tail of the list.
 	 */
@@ -227,6 +240,10 @@ public class SLL<T extends Comparable<T>>{
 		} else {
 			return null;
 		}
+	}
+	
+	private SLL<T> getNextNode(){
+		return getNext();
 	}
 	
 }
