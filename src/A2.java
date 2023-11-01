@@ -57,6 +57,7 @@ public class A2 extends Avenger {
 			if (word.length() != 0) {
 				totalwordCount++;
 			}
+			matchIncrement(word,possibleAvengers);
 		}
 		input.close();
 	}
@@ -148,7 +149,7 @@ public class A2 extends Avenger {
 
 		// Print all ordered by alias alphabetically
 		System.out.println("All mentioned avengers in alphabetical order:");
-		alphabeticaListing(avengersByMentions, );
+		alphabeticaListing(avengersByMentions, alphabeticalOrderList);
 		printList(alphabeticalOrderList);
 		System.out.println();
 	}
@@ -158,7 +159,7 @@ public class A2 extends Avenger {
 	 */
 	public void alphabeticaListing(SLL<Avenger> list, SLL<Avenger> target) {
 		target = list;
-		addInOrder(target);
+		addInOrder(list,target);
 	}
 
 	/**

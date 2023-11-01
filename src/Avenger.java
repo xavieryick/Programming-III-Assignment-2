@@ -17,12 +17,14 @@ public class Avenger extends SLL<Avenger> implements Comparable<Avenger> {
 		this.heroName = name;
 		this.heroAlias = alias;
 		this.performer = actor;
-		nameFreq= 0;
+		nameFreq = 0;
 		aliasFreq = 0;
 		performerFreq = 0;
 	}
-	//Default Constructor
-	public Avenger() {}
+
+	// Default Constructor
+	public Avenger() {
+	}
 
 	// Getters
 	public String getName() {
@@ -36,6 +38,7 @@ public class Avenger extends SLL<Avenger> implements Comparable<Avenger> {
 	public String getActor() {
 		return performer;
 	}
+
 	public int getNameCount() {
 		return nameFreq;
 	}
@@ -47,7 +50,8 @@ public class Avenger extends SLL<Avenger> implements Comparable<Avenger> {
 	public int getActorCount() {
 		return performerFreq;
 	}
-	//Incrementing the Counters
+
+	// Incrementing the Counters
 	public void incrementNameCount() {
 		nameFreq++;
 	}
@@ -61,7 +65,7 @@ public class Avenger extends SLL<Avenger> implements Comparable<Avenger> {
 	}
 
 	@Override
-	public boolean equals(Object obj) {		//Matching compareTo to order Alias alphabetically
+	public boolean equals(Object obj) { // Matching compareTo to order Alias alphabetically
 		if (obj == null) {
 			return false;
 		}
@@ -77,53 +81,53 @@ public class Avenger extends SLL<Avenger> implements Comparable<Avenger> {
 	}
 
 	@Override
-	public int compareTo(Avenger a) {		//Order Alias alphabetically
+	public int compareTo(Avenger a) { // Order Alias alphabetically
 		int orderAlphAlias = this.heroAlias.compareTo(a.getAlias());
 		return orderAlphAlias;
 	}
+
 	@Override
 	public String toString() {
-		return  heroAlias + " aka " + heroName
-				+ " performed by " + performer
-				+ " mentioned "
-				+ "(n: " + nameFreq
-				+ " + a: " + aliasFreq
-				+ " + p: " + performerFreq
-				+ ")" + " time(s)";
-	}
-	public void addInOrder(SLL<Avenger> target) {
-		addInOrderActor(target);
+		return heroAlias + " aka " + heroName + " performed by " + performer + " mentioned " + "(n: " + nameFreq
+				+ " + a: " + aliasFreq + " + p: " + performerFreq + ")" + " time(s)";
 	}
 
-	private void addInOrderActor(SLL<Avenger> target) {
-		if(target == null || target.getNext() == null) {
-			return;
-		}else if(target.size() > 1) {
-			SLL<Avenger> curr = target.getNext();
-			SLL<Avenger> chosenNode = curr.deleteHead();
-			while(chosenNode != null) {
-				while(curr != null) {
-					if(comparing(chosenNode,curr) < 1) {
-						curr = curr.getNext();
-					}else if(comparing(chosenNode,curr) > 1) {
-						chosenNode.setNext(curr.getNext());
-						curr.setNext(chosenNode);
-						
-					}
-				}
-			}	
-		}
-	}
-	
-	
-	public int comparing(SLL<Avenger> n1, SLL<Avenger> n2) {
-		Node<Avenger> node1= n1.getData();
-		Node<Avenger> node2= n2.getData();
-		
+//	public void addInOrder(SLL<Avenger> original, SLL<Avenger> target) {
+//		addInOrderAlphabActor(original, target);
+//	}
+
+//	public void addInOrderAlphabActor(SLL<Avenger> original, SLL<Avenger> target) {
+//	    Node<Avenger> currentNode = original.getHead();
+//
+//	    while (currentNode != null) {
+//	        Node<Avenger> nextNode = currentNode.getNext();
+//	        
+//	        if (target.Empty() || target.getHead().compareTo(currentNode) >= 0) {
+//	            // If the target list is empty or the original element should be inserted at the beginning
+//	            currentNode.setNext(target.getHead());
+//	            target.setHead(currentNode);
+//	        } else {
+//	            Node<Avenger> currentTargetNode = target.getHead();
+//	            Node<Avenger> prevTargetNode = null;
+//
+//	            while (currentTargetNode != null && currentTargetNode.compareTo(currentNode) < 0) {
+//	                prevTargetNode = currentTargetNode;
+//	                currentTargetNode = currentTargetNode.getNext();
+//	            }
+//
+//	            prevTargetNode.setNext(currentNode);
+//	            currentNode.setNext(currentTargetNode);
+//	        }
+//	        
+//	        original.setHead(nextNode); // Move to the next node in the original list
+//	    }
+//	}
+
+	public int comparing(Node<String> n1, Node<String> n2) {
 		if (n1 == null || n2 == null) {
 			return 0;
 		} else {
-			return node1.getData().getAlias().compareTo(node2.getData().getAlias());
+			return n1.getData().compareTo(n2.getData());
 		}
 	}
 }

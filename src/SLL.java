@@ -139,9 +139,18 @@ public class SLL<T extends Comparable<T>>{
 	public boolean exist(T key) {
 		return exists(key);
 	}
+	public void setHead(Node<T> newNode) {
+	    setToHead(newNode);
+	 }
 
 				// Private methods
-
+	private void setToHead(Node<T> newNode) {
+	    if (newNode != null) {
+	        newNode.setNext(head); // Set the next of the new node to the current head
+	        head = newNode; // Update the head to be the new node
+	    }
+	 }
+	
 	/*
 	 * Add a new Node to the head of the list.
 	 */
@@ -164,9 +173,8 @@ public class SLL<T extends Comparable<T>>{
 	public Node<T> getData(){
 		return getData();
 	}
-	public void setNext(SLL <Avenger> n) {
-		Node<T> av = new Node<T>(n);
-		setNext(av);
+	public void setNext(SLL <T> n) {
+		setNext(n);
 	}
 	
 	/*
