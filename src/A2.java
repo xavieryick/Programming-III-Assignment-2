@@ -48,7 +48,7 @@ public class A2 extends SLL<Avenger> {
 		head = avengersList.getHead();
 		tail = avengersList.getTail();
 		avengersList = readInput(avengersList);
-		printResults(totalWordCount, head, avengersList);
+		printResults(totalWordCount, avengersList);
 	}
 
 	public SLL<Avenger> readInput(SLL<Avenger> avengersList) {
@@ -207,38 +207,99 @@ public class A2 extends SLL<Avenger> {
 	}
 	
 	// change to return list
-	public SLL<Avenger> addInOrderTotal(SLL<Avenger> printList, Node<Avenger> av) {
-		if (printList.isEmpty() || av.getData().getTotalCount() > printList.getHead().getData().getTotalCount() || 
-			       (av.getData().getTotalCount() == printList.getHead().getData().getTotalCount() && 
-			        av.getData().getActor().compareTo(printList.getHead().getData().getActor()) <= 0)) {
-			printList.addHead(av);
-			    } else {
-			        Node<Avenger> iterator = printList.getHead();
-			        while (iterator.getNext() != null && 
-			              (av.getData().getTotalCount() < iterator.getNext().getData().getTotalCount() || 
-			               (av.getData().getTotalCount() == iterator.getNext().getData().getTotalCount() && 
-			                av.getData().getActor().compareTo(iterator.getNext().getData().getActor()) > 0))) {
-			            iterator = iterator.getNext();
-			        }
-			        av.setNext(iterator.getNext());
-			        iterator.setNext(av);
-			    }
-	    return printList;
+	public SLL<Avenger> addInOrderTotal(SLL<Avenger> list, Node<Avenger> av) {
+		// 0
+		if (list.isEmpty()) {
+			list.addHead(av);
+			return list;
+		}
+		
+		// 1
+		Node<Avenger> iterator = list.getHead();
+		Node<Avenger> previous = null;		
+		if (list.size() == 1) {
+			int avTotal = av.getData().getTotalCount();
+			int headTotal = av.getData().getTotalCount();
+			if (avTotal > headTotal) {
+				list.addHead(av);
+				return list;
+			}
+			else if (avTotal < headTotal) {
+				list.addTail(av);
+				return list;
+			}
+			else {
+				// compare actor
+			}
+		}
+		
+		// 2+
+		else {
+			int avTotal = av.getData().getTotalCount();
+			int irTotal = iterator.getData().getTotalCount();
+			if (avTotal > irTotal) {
+				av.setNext(iterator);
+				head = av;
+				return list;
+			}
+			else {
+				while (avTotal < irTotal) {
+					previous = iterator;
+					iterator = iterator.getNext();
+					if (iterator == null) {
+						list.addTail(av);
+						return list;
+					}
+					avTotal = av.getData().getTotalCount();
+					irTotal = iterator.getData().getTotalCount();
+				}
+				if (avTotal > irTotal) {
+					previous.setNext(av);
+					av.setNext(iterator);
+				}
+				if (avTotal == irTotal) {
+					// compare actor
+				}
+			}
+		}
+		return list;
 	}
 	
 	//change to return list
 	public SLL<Avenger> addInOrderActor(SLL<Avenger> printList, Node<Avenger> av) {
-	    if (printList.isEmpty() || av.getData().getActorCount() >= printList.getHead().getData().getActorCount()) {
-	        printList.addHead(av);
-	    } else {
-	        Node<Avenger> iterator = printList.getHead();
-	        while (iterator.getNext() != null && av.getData().getActorCount() < iterator.getNext().getData().getActorCount()) {
-	            iterator = iterator.getNext();
-	        }
-	        av.setNext(iterator.getNext());
-	        iterator.setNext(av);
-	    }
-	    return printList;
+		Node<Avenger> iterator = printList.getHead();
+		Node<Avenger> previous = null;
+		
+		if (printList.isEmpty()) {
+			printList.addHead(av);
+		}
+		else {
+			int avActor = av.getData().getActorCount();
+			int iteratorActor = iterator.getData().getActorCount();
+			while (avActor < iteratorActor) {
+				previous = iterator;
+				iterator = iterator.getNext();
+				avActor = av.getData().getActorCount();
+				iteratorActor = iterator.getData().getActorCount();
+			}
+			if (avActor > iteratorActor) {
+				previous.setNext(av);
+				av.setNext(iterator);
+			}
+			else if (avActor == iteratorActor) {
+				//compare actor name
+				int nameResult = av.getData().getAlias().compareTo(iterator.getData().getAlias());
+				if (nameResult < 0) {
+					previous.setNext(av);
+					av.setNext(iterator);
+				}
+				else {
+					av.setNext(iterator.getNext());
+					iterator.setNext(av);
+				}
+			}
+		}
+		return printList;
 	}
 
 	//change to return list
@@ -330,25 +391,25 @@ public class A2 extends SLL<Avenger> {
 	    }
 	}
 
-	private void printResults(int totalWordCount, Node<Avenger> head, SLL<Avenger> list) {
-		System.out.println("Total number of words: " + totalWordCount);
-		System.out.println("Number of Avengers Mentioned: " + list.size());
-		System.out.println();
-		
-		System.out.println("All avengers in the order they appeared in the input stream:");
-		printInOrder(list);
-		System.out.println();
+	private void printResults(int totalWordCount, SLL<Avenger> list) {
+//		System.out.println("Total number of words: " + totalWordCount);
+//		System.out.println("Number of Avengers Mentioned: " + list.size());
+//		System.out.println();
+//		
+//		System.out.println("All avengers in the order they appeared in the input stream:");
+//		printInOrder(list);
+//		System.out.println();
 		
 		System.out.println("Top " + topN + " most popular avengers:");
 		printTopNAvengers(list);		
 		System.out.println();
 		
-		System.out.println("Top " + topN + " most popular performers:");
-		printTopNPerformers(list);
-		System.out.println();
-		
-		System.out.println("All mentioned avengers in alphabetical order:");
-		printAlphabetical(list);
-		System.out.println();
+//		System.out.println("Top " + topN + " most popular performers:");
+//		printTopNPerformers(list);
+//		System.out.println();
+//		
+//		System.out.println("All mentioned avengers in alphabetical order:");
+//		printAlphabetical(list);
+//		System.out.println();
 	}
 }
