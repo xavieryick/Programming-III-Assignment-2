@@ -386,7 +386,7 @@ public class A2 extends SLL {
 		int count = 0;
 		int max = list.size();
 		while (count < max) {
-			subList = subList.addInOrderTotal(iterator);
+			subList.addInOrderTotal(iterator);
 			iterator = iterator.getNext();
 			count ++;
 		}
