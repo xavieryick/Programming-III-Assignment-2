@@ -12,50 +12,51 @@ public class Avenger {
 		this.heroName = name;
 		this.heroAlias = alias;
 		this.performer = actor;
-		nameFreq= 0;
-		aliasFreq = 0;
-		performerFreq = 0;
+		this.nameFreq= 0;
+		this.aliasFreq = 0;
+		this.performerFreq = 0;
 	}
 
 	// Getters
 	public String getName() {
-		return heroName;
+		return this.heroName;
 	}
 
 	public String getAlias() {
-		return heroAlias;
+		return this.heroAlias;
 	}
 
 	public String getActor() {
-		return performer;
+		return this.performer;
 	}
 	public int getNameCount() {
-		return nameFreq;
+		return this.nameFreq;
 	}
 
 	public int getAliasCount() {
-		return aliasFreq;
+		return this.aliasFreq;
 	}
 
 	public int getActorCount() {
-		return performerFreq;
+		return this.performerFreq;
 	}
 	
 	public int getTotalCount() {
-		return nameFreq + aliasFreq + performerFreq;
+		int total = this.getNameCount() + this.getAliasCount() + this.getActorCount();
+		return total;
 	}
 	
 	//Incrementing the Counters
 	public void incrementNameCount() {
-		nameFreq++;
+		this.nameFreq++;
 	}
 
 	public void incrementAliasCount() {
-		aliasFreq++;
+		this.aliasFreq++;
 	}
 
 	public void incrementActorCount() {
-		performerFreq++;
+		this.performerFreq++;
 	}
 
 	@Override

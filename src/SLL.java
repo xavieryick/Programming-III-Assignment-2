@@ -92,35 +92,42 @@ public class SLL<T> {
 	public SLL<T> addInOrderTotal(Node<Avenger> av) {
 		if (isEmpty()) {
 			this.addHead(av);
+			return this;
 		}
-		else if (this.getHead().getNext() == null) {
+		else if (this.head.getNext() == null) {
 			int diff = compareTotal(av, this.getHead(), totalCompare);
 			if (diff > 0) {
-				av.setNext(this.head);
-				this.addHead(av);
+				av.setNext(head);
+				head = av;
 			}
 			else if (diff < 0) {
-				this.head.setNext(av);
+				head.setNext(av);
 			}
 			else {
-				// compare else
+				//other
 			}
+			return this;
 		}
 		else {
 			Node<Avenger> iterator = this.head;
 			Node<Avenger> previous = null;
-			while (iterator != null) {
-				int diff = compareTotal(av, iterator, totalCompare);
-				if (diff > 0) {
+			int diff = compareTotal(av, iterator, totalCompare);
+			while (diff < 0) {
+				previous = iterator;
+				iterator = iterator.getNext();
+				diff = compareTotal(av, iterator, totalCompare);
+			}
+			if (diff == 0) {
+				//
+			}
+			if (diff > 0) {
+				if (previous != null) {
 					previous.setNext(av);
 					av.setNext(iterator);
 				}
-				else if (diff < 0) {
-					previous = iterator;
-					iterator = iterator.getNext();
-				}
-				else {
-					//compare else
+				if (previous == null) {
+					av.setNext(iterator);
+					head = av;
 				}
 			}
 		}
@@ -130,35 +137,42 @@ public class SLL<T> {
 	public SLL<T> addInOrderPerformer(Node<Avenger> av) {
 		if (isEmpty()) {
 			this.addHead(av);
+			return this;
 		}
-		else if (this.getHead().getNext() == null) {
+		else if (this.head.getNext() == null) {
 			int diff = comparePerformer(av, this.getHead(), performerCompare);
 			if (diff > 0) {
-				av.setNext(this.head);
-				this.addHead(av);
+				av.setNext(head);
+				head = av;
 			}
 			else if (diff < 0) {
-				this.head.setNext(av);
+				head.setNext(av);
 			}
 			else {
-				// compare else
+				//other
 			}
+			return this;
 		}
 		else {
 			Node<Avenger> iterator = this.head;
 			Node<Avenger> previous = null;
-			while (iterator != null) {
-				int diff = comparePerformer(av, iterator, performerCompare);
-				if (diff > 0) {
+			int diff = comparePerformer(av, iterator, performerCompare);
+			while (diff < 0) {
+				previous = iterator;
+				iterator = iterator.getNext();
+				diff = comparePerformer(av, iterator, performerCompare);
+			}
+			if (diff == 0) {
+				//
+			}
+			if (diff > 0) {
+				if (previous != null) {
 					previous.setNext(av);
 					av.setNext(iterator);
 				}
-				else if (diff < 0) {
-					previous = iterator;
-					iterator = iterator.getNext();
-				}
-				else {
-					//compare else
+				if (previous == null) {
+					av.setNext(iterator);
+					head = av;
 				}
 			}
 		}
@@ -167,8 +181,7 @@ public class SLL<T> {
 	
 	// maybe creating these works?
 	public int compareTotal(Node<Avenger> a, Node<Avenger> b, totalCompare comparing) {
-		int result = comparing.compare(a, b);
-		return result;
+		return comparing.compare(a, b);
 	}
 	
 	public int comparePerformer(Node<Avenger> a, Node<Avenger> b, performerCompare comparing) {

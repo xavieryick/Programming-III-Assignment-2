@@ -9,7 +9,7 @@ public class totalCompare implements Comparator<Node<Avenger>>{
 		 * in case of tie, in ascending alphabetical order of performer's last name
 		 */
 		public int compare(Node<Avenger>  a, Node<Avenger> b) {
-			int diff = b.getData().getTotalCount() - a.getData().getTotalCount();
+			int diff = a.getData().getTotalCount() - b.getData().getTotalCount();
 			if (diff == 0) {
 				return a.getData().getActor().compareTo(b.getData().getActor());
 			}
