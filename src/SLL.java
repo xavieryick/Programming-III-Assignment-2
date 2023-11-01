@@ -1,6 +1,7 @@
-
-public class SLL<Avenger extends Comparable<Avenger>>{
+public class SLL<T> {
 	private Node<Avenger> head, tail;
+	private totalCompare totalCompare = new totalCompare();
+	private performerCompare performerCompare = new performerCompare();
 
 	public SLL() {
 		this.head = null;
@@ -86,5 +87,91 @@ public class SLL<Avenger extends Comparable<Avenger>>{
 			counter = counter.getNext();
 		}
 		return count;
+	}
+	
+	public SLL<T> addInOrderTotal(Node<Avenger> av) {
+		if (isEmpty()) {
+			this.addHead(av);
+		}
+		else if (this.getHead().getNext() == null) {
+			int diff = compareTotal(av, this.getHead(), totalCompare);
+			if (diff > 0) {
+				av.setNext(this.head);
+				this.addHead(av);
+			}
+			else if (diff < 0) {
+				this.head.setNext(av);
+			}
+			else {
+				// compare else
+			}
+		}
+		else {
+			Node<Avenger> iterator = this.head;
+			Node<Avenger> previous = null;
+			while (iterator != null) {
+				int diff = compareTotal(av, iterator, totalCompare);
+				if (diff > 0) {
+					previous.setNext(av);
+					av.setNext(iterator);
+				}
+				else if (diff < 0) {
+					previous = iterator;
+					iterator = iterator.getNext();
+				}
+				else {
+					//compare else
+				}
+			}
+		}
+		return this;
+	}
+
+	public SLL<T> addInOrderPerformer(Node<Avenger> av) {
+		if (isEmpty()) {
+			this.addHead(av);
+		}
+		else if (this.getHead().getNext() == null) {
+			int diff = comparePerformer(av, this.getHead(), performerCompare);
+			if (diff > 0) {
+				av.setNext(this.head);
+				this.addHead(av);
+			}
+			else if (diff < 0) {
+				this.head.setNext(av);
+			}
+			else {
+				// compare else
+			}
+		}
+		else {
+			Node<Avenger> iterator = this.head;
+			Node<Avenger> previous = null;
+			while (iterator != null) {
+				int diff = comparePerformer(av, iterator, performerCompare);
+				if (diff > 0) {
+					previous.setNext(av);
+					av.setNext(iterator);
+				}
+				else if (diff < 0) {
+					previous = iterator;
+					iterator = iterator.getNext();
+				}
+				else {
+					//compare else
+				}
+			}
+		}
+		return this;
+	}
+	
+	// maybe creating these works?
+	public int compareTotal(Node<Avenger> a, Node<Avenger> b, totalCompare comparing) {
+		int result = comparing.compare(a, b);
+		return result;
+	}
+	
+	public int comparePerformer(Node<Avenger> a, Node<Avenger> b, performerCompare comparing) {
+		return comparing.compare(a, b);
 	}
 }

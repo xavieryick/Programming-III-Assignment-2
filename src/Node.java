@@ -1,5 +1,5 @@
 
-public class Node<Avenger>{
+public class Node<T>{
 	private Avenger data;
 	private Node<Avenger> next;
 
