@@ -1,7 +1,7 @@
 public class SLL<T> {
 	private Node<Avenger> head, tail;
-	private totalCompare totalCompare;
-	private performerCompare performerCompare;
+	private totalCompare totalCompare = new totalCompare();
+	private performerCompare performerCompare = new performerCompare();
 
 	public SLL() {
 		head = null;
@@ -89,77 +89,51 @@ public class SLL<T> {
 		return count;
 	}
 	
-	//something bout this one fr
-	public void addInOrderTotal(Node<Avenger> av) {
-		if (contains(av)) {
-			return;
-		}
-		if (isEmpty()) {
-			addHead(av);
-		} 
-		else {
-			if (compare(av, head, totalCompare) >= 0)
-				addHead(av);
-			else {
-				Node<Avenger> currentNode = head;
-				while (currentNode.getNext() != null && compare(av, head, totalCompare) < 0) {
-					currentNode = currentNode.getNext();
-				}
-				if (currentNode.getNext() == null) {
-					addTail(av);
-				} else {
-					av.setNext(currentNode.getNext());
-					currentNode.setNext(av);
-				}
-			}
-		}
+	public Node<Avenger> addInOrderTotal(Node<Avenger> head, Node<Avenger> av) {
+	    if (head == null || totalCompare.compare(av, head) >= 0) {
+	        av.setNext(head);
+	        return av;
+	    } else {
+	        Node<Avenger> current = head;
+	        while (current.getNext() != null && totalCompare.compare(av, head) < 0) {
+	            current = current.getNext();
+	        }
+	        av.setNext(current.getNext());
+	        current.setNext(av);
+	        return head;
+	    }
 	}
 
-	public void addInOrderPerformer(Node<Avenger> av) {
-		if (contains(av)) {
-			return;
-		}
-		if (isEmpty()) {
-			addHead(av);
-		} 
-		else {
-			if (compare(av, head, performerCompare) >= 0)
-				addHead(av);
-			else {
-				Node<Avenger> currentNode = head;
-				while (currentNode.getNext() != null && compare(av, head, performerCompare) < 0) {
-					currentNode = currentNode.getNext();
-				}
-				if (currentNode.getNext() == null) {
-					addTail(av);
-				} else {
-					av.setNext(currentNode.getNext());
-					currentNode.setNext(av);
-				}
-			}
-		}
+	public Node<Avenger> addInOrderPerformer(Node<Avenger> head, Node<Avenger> av) {
+	    if (head == null || performerCompare.compare(av, head) >= 0) {
+	        av.setNext(head);
+	        return av;
+	    } else {
+	        Node<Avenger> current = head;
+	        while (current.getNext() != null && performerCompare.compare(av, head) < 0) {
+	            current = current.getNext();
+	        }
+	        av.setNext(current.getNext());
+	        current.setNext(av);
+	        return head;
+	    }
 	}
 	
-	public void addInOrderAlphabetical(Node<Avenger> av) {
-		if (isEmpty()) {
-			addHead(av);
-		} else {
-			if (av.getData().getAlias().compareTo(head.getData().getAlias()) >= 0)
-				addHead(av);
-			else {
-				Node<Avenger> currentNode = head;
-				while (currentNode.getNext() != null && av.getData().getAlias().compareTo(currentNode.getNext().getData().getAlias()) < 0) {
-					currentNode = currentNode.getNext();
-				}
-				if (currentNode.getNext() == null) {
-					addTail(av);
-				} else {
-					av.setNext(currentNode.getNext());
-					currentNode.setNext(av);
-				}
-			}
-		}
+	public Node<Avenger> addInOrderAlphabetical(Node<Avenger> head, Node<Avenger> av) {
+	    if (head == null || av.getData().getAlias().compareTo(head.getData().getAlias()) <= 0) {
+	        av.setNext(head);
+	        return av;
+	    } else {
+	        Node<Avenger> current = head;
+	        while (current.getNext() != null && av.getData().getAlias().compareTo(current.getNext().getData().getAlias()) > 0) {
+	            current = current.getNext();
+	        }
+	        av.setNext(current.getNext());
+	        current.setNext(av);
+	        return head;
+	    }
 	}
+
 	
 	public int compare(Node<Avenger> a, Node<Avenger> b, totalCompare comparing) {
 		return comparing.compare(a, b);
