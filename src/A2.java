@@ -42,11 +42,20 @@ public class A2 extends SLL<Avenger> {
 	int totalWordCount = 0;
 	int topN = 4;
 	
+	/**
+	 * Creates an instance of the A2 class and starts processing of input text
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		A2 manager = new A2();
 		manager.run();		
 	}
 
+	/**
+	 * Runs the programs processing the input text and printing the results
+	 * 
+	 */
 	public void run() {		
 		head = avengersList.getHead();
 		tail = avengersList.getTail();
@@ -54,6 +63,12 @@ public class A2 extends SLL<Avenger> {
 		printResults(totalWordCount, avengersList);
 	}
 
+	/**
+	 * read the input of the text file and cleans each word
+	 * 
+	 * @param avengersList
+	 * @return
+	 */
 	public SLL<Avenger> readInput() {
 		Scanner input = new Scanner(System.in);
 		while (input.hasNext()) {
@@ -68,8 +83,12 @@ public class A2 extends SLL<Avenger> {
 		return avengersList;
 	}
 
-	/*
-	 * Matching and incrementing each Avenger's counts
+	/**
+	 * matches and increments each Avenger's counts
+	 * 
+	 * @param word
+	 * @param list
+	 * @return
 	 */
 	public SLL<Avenger> matchIncrement(String word, SLL<Avenger> list) {	
 		if (word.equals(avengerRoster[0][0]) || word.equals(avengerRoster[0][1]) || word.equals(avengerRoster[0][2])) {
@@ -198,7 +217,13 @@ public class A2 extends SLL<Avenger> {
 		return list;
 	}
 
-	// adds to given list if given avenger isnt in it
+	/**
+	 * Checks if a given Avenger node is present in the linked list and adds it to the list if not found.
+	 *
+	 * @param list The linked list of Avengers to check
+	 * @param av The Avenger node to be checked and added
+	 * @return The modified linked list with the Avenger node added if wasn't present
+	 */
 	public SLL<Avenger> checkList(SLL<Avenger> list, Node<Avenger> av) {	
 		if (list.contains(av)) {
 			return list;
@@ -218,7 +243,11 @@ public class A2 extends SLL<Avenger> {
 		 }
 	}
 	
-	//
+		/**
+	 * Prints the topN most popular Avengers based on the order they appear in the list
+	 *
+	 * @param list The linked list of Avengers to be printed
+	 */
 	public Node<Avenger> printTopNAvengers(Node<Avenger> head) {
 	    Node<Avenger> sortedList = null;
 	    Node<Avenger> iterator = head;
@@ -241,7 +270,11 @@ public class A2 extends SLL<Avenger> {
 	    return sortedList;  // Return the sorted list
 	}
 	
-	// 
+	/**
+	 * Prints the topN most popular Avengers based on the actor count in ascending order
+	 *
+	 * @param list The linked list of Avengers to be printed
+	 */
 	public Node<Avenger> printTopNPerformers(Node<Avenger> head) {
 	    Node<Avenger> sortedList = null;
 	    Node<Avenger> iterator = head;
@@ -264,7 +297,12 @@ public class A2 extends SLL<Avenger> {
 	    return sortedList;  // Return the sorted list
 	}
 	
-	// good
+	/**
+	 * Prints all the Avengers in the linked list in alphabetical order of their aliases
+	 *
+	 * @param head The head of the linked list to be printed alphabetically
+	 * @return The head of the linked list after printing
+	 */
 	public Node<Avenger> printAlphabetical(Node<Avenger> head) {
 	    Node<Avenger> sortedList = null;
 	    Node<Avenger> iterator = head;
@@ -298,6 +336,14 @@ public class A2 extends SLL<Avenger> {
 		return copiedList;
 	}
 	
+	/**
+	 * Prints the results of the avengers list by the order appeared, most popular avengers,
+	 * most popular performers, and alphabetical mentions
+	 * 
+	 * @param totalWordCount
+	 * @param head
+	 * @param list
+	 */
 	private void printResults(int totalWordCount, SLL<Avenger> list) {
 		SLL<Avenger> list2 = copy(list);
 		SLL<Avenger> list3 = copy(list);
