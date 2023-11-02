@@ -265,9 +265,8 @@ public class A2 extends SLL {
 	    printTopNPerformers2(list);
 	    System.out.println();
 
-	    head = printAlphabetical2(head); // Update 'head' with the sorted list
 	    System.out.println("All mentioned avengers in alphabetical order:");
-	    printAlphabetical2(head);
+	    printAlphabetical2(list.getHead()); // Print alphabetical list
 	    System.out.println();
 	}
 
