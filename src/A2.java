@@ -291,8 +291,8 @@ public class A2 extends SLL {
 	    return list;
 	}
 
-	public void addInOrderActor2(Node<Avenger> head, Node<Avenger> av) {
-	    Node<Avenger> current = head;
+	public SLL<Avenger> addInOrderActorCount(SLL<Avenger> list, Node<Avenger> av) {
+	    Node<Avenger> current = list.getHead();
 	    Node<Avenger> previous = null;
 
 	    while (current != null && av.getData().getActorCount() <= current.getData().getActorCount()) {
@@ -301,13 +301,31 @@ public class A2 extends SLL {
 	    }
 
 	    if (previous == null) {
-	        av.setNext(head);
-	        head = av;
+	        av.setNext(list.getHead());
+	        list.setHead(av);
 	    } else {
 	        previous.setNext(av);
 	        av.setNext(current);
 	    }
+
+	    return list;
 	}
+	public SLL<Avenger> sortAvengersByActorCount(SLL<Avenger> list) {
+	    SLL<Avenger> sortedList = new SLL<>();
+	    Node<Avenger> iterator = list.getHead();
+
+	    while (iterator != null) {
+	        Node<Avenger> current = iterator;
+	        iterator = iterator.getNext();
+	        current.setNext(null);  // Disconnect the current node from the rest of the list
+	        sortedList = addInOrderActorCount(sortedList, current);
+	    }
+
+	    return sortedList;  // Return the sorted list
+	}
+
+
+	
 
 	public Node<Avenger> addInOrderAlphabetical2(Node<Avenger> head, Node<Avenger> av) {
 	    if (head == null || av.getData().getAlias().compareTo(head.getData().getAlias()) <= 0) {
@@ -337,7 +355,9 @@ public class A2 extends SLL {
 	}
 
 	public void printTopNPerformers2(SLL<Avenger> list) {
-	    Node<Avenger> iterator = list.getHead();
+	    SLL<Avenger> sortedList = sortAvengersByActorCount(list);
+	    
+	    Node<Avenger> iterator = sortedList.getHead();
 	    int printCount = 0;
 
 	    while (iterator != null && printCount < topN) {
@@ -346,6 +366,7 @@ public class A2 extends SLL {
 	        printCount++;
 	    }
 	}
+
 
 	public Node<Avenger> printAlphabetical2(Node<Avenger> head) {
 	    Node<Avenger> sortedList = null;
@@ -356,6 +377,13 @@ public class A2 extends SLL {
 	        iterator = iterator.getNext();
 	        current.setNext(null);  // Disconnect the current node from the rest of the list
 	        sortedList = addInOrderAlphabetical2(sortedList, current);
+	    }
+
+	    // Print the avengers in alphabetical order
+	    Node<Avenger> alphabeticalIterator = sortedList;
+	    while (alphabeticalIterator != null) {
+	        System.out.println(alphabeticalIterator.toString());
+	        alphabeticalIterator = alphabeticalIterator.getNext();
 	    }
 
 	    return sortedList;  // Return the sorted list
