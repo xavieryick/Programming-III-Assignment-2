@@ -33,6 +33,9 @@ public class A2 extends SLL<Avenger> {
 	private Node<Avenger> winterSoldierNode = new Node<Avenger>(winterSoldier);
 
 	SLL<Avenger> avengersList = new SLL<>();
+	SLL<Avenger> avengersList2 = new SLL<>();
+	SLL<Avenger> avengersList3 = new SLL<>();
+	SLL<Avenger> avengersList4 = new SLL<>();
 	private Node<Avenger> head; 
 	private Node<Avenger> tail;
 	
@@ -48,7 +51,7 @@ public class A2 extends SLL<Avenger> {
 		head = avengersList.getHead();
 		tail = avengersList.getTail();
 		avengersList = readInput();
-		printResults(totalWordCount, head, avengersList);
+		printResults(totalWordCount, avengersList);
 	}
 
 	public SLL<Avenger> readInput() {
@@ -228,10 +231,12 @@ public class A2 extends SLL<Avenger> {
 	    }
 
 	    // Print the avengers in alphabetical order
+	    int printCounter = 0;
 	    Node<Avenger> totalIterator = sortedList;
-	    while (totalIterator != null) {
+	    while (totalIterator != null && printCounter < topN) {
 	        System.out.println(totalIterator.toString());
 	        totalIterator = totalIterator.getNext();
+	        printCounter ++;
 	    }
 
 	    return sortedList;  // Return the sorted list
@@ -250,10 +255,12 @@ public class A2 extends SLL<Avenger> {
 	    }
 
 	    // Print the avengers in alphabetical order
+	    int printCounter = 0;
 	    Node<Avenger> performerIterator = sortedList;
-	    while (performerIterator != null) {
+	    while (performerIterator != null && printCounter < topN) {
 	        System.out.println(performerIterator.toString());
 	        performerIterator = performerIterator.getNext();
+	        printCounter ++;
 	    }
 
 	    return sortedList;  // Return the sorted list
@@ -281,7 +288,23 @@ public class A2 extends SLL<Avenger> {
 	    return sortedList;  // Return the sorted list
 	}
 
-	private void printResults(int totalWordCount, Node<Avenger> head, SLL<Avenger> list) {
+	private SLL<Avenger> copy(SLL<Avenger> list) {
+		SLL<Avenger> copiedList = new SLL<Avenger>();
+		Node<Avenger> current = list.getHead();
+		
+		while (current != null) {
+			Node<Avenger> nodeToAdd = new Node<Avenger>(current.getData());
+			copiedList.addTail(nodeToAdd);
+			current = current.getNext();
+		}
+		return copiedList;
+	}
+	
+	private void printResults(int totalWordCount, SLL<Avenger> list) {
+		SLL<Avenger> list2 = copy(list);
+		SLL<Avenger> list3 = copy(list);
+		SLL<Avenger> list4 = copy(list);
+		
 		System.out.println("Total number of words: " + totalWordCount);
 		System.out.println("Number of Avengers Mentioned: " + list.size());
 		System.out.println();
@@ -291,15 +314,15 @@ public class A2 extends SLL<Avenger> {
 		System.out.println();
 		
 		System.out.println("Top " + topN + " most popular avengers:");
-		printTopNAvengers(list.getHead());
+		printTopNAvengers(list2.getHead());
 		System.out.println();
 
 		System.out.println("Top " + topN + " most popular performers:");
-		printTopNPerformers(list.getHead());
+		printTopNPerformers(list3.getHead());
 		System.out.println();
 		
 		System.out.println("All mentioned avengers in alphabetical order:");
-		printAlphabetical(list.getHead());
+		printAlphabetical(list4.getHead());
 		System.out.println();
 	}
 }
