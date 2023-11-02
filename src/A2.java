@@ -270,27 +270,6 @@ public class A2 extends SLL {
 	    System.out.println();
 	}
 
-	// Implement the sorting methods (uncomment and complete the methods)
-	public SLL<Avenger> addInOrderTotal2(SLL<Avenger> list, Node<Avenger> av) {
-	    Node<Avenger> current = list.getHead();
-	    Node<Avenger> previous = null;
-
-	    while (current != null && av.getData().getTotalCount() <= current.getData().getTotalCount()) {
-	        previous = current;
-	        current = current.getNext();
-	    }
-
-	    if (previous == null) {
-	        av.setNext(list.getHead());
-	        list.setHead(av);
-	    } else {
-	        previous.setNext(av);
-	        av.setNext(current);
-	    }
-
-	    return list;
-	}
-
 	public SLL<Avenger> addInOrderActorCount(SLL<Avenger> list, Node<Avenger> av) {
 	    Node<Avenger> current = list.getHead();
 	    Node<Avenger> previous = null;
