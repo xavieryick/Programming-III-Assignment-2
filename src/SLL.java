@@ -1,15 +1,15 @@
 public class SLL<T> {
 	private Node<Avenger> head, tail;
-	private totalCompare totalCompare = new totalCompare();
-	private performerCompare performerCompare = new performerCompare();
+	private totalCompare totalCompare;
+	private performerCompare performerCompare;
 
 	public SLL() {
-		this.head = null;
-		this.tail = null;
+		head = null;
+		tail = null;
 	}
 
 	public boolean isEmpty() {
-		if (this.head == null) {
+		if (head == null) {
 			return true;
 		}
 		else {
@@ -19,37 +19,37 @@ public class SLL<T> {
 	
 	public void addHead(Node<Avenger> av) {
 		if (isEmpty()) {
-			this.head = av;
-			this.tail = av;
+			head = av;
+			tail = av;
 		}
 		else {
-			av.setNext(this.head);
-			this.head = av;
+			av.setNext(head);
+			head = av;
 		}
 	}
 	
 	public void addTail(Node<Avenger> av) {
 		if (isEmpty()) {
-			this.head = av;
-			this.tail = av;
+			head = av;
+			tail = av;
 		}
 		else {
-			this.tail.setNext(av);
-			this.tail = av;
+			tail.setNext(av);
+			tail = av;
 		}
 	}
 	
 	public Node<Avenger> getHead() {
-		return this.head;
+		return head;
 	}
 	
 	public Node<Avenger> getTail() {
-		return this.tail;
+		return tail;
 	}
 
 	public boolean contains(Node<Avenger> a) {
 		boolean status;
-		Node<Avenger> iterator = this.head;
+		Node<Avenger> iterator = head;
 		if (isEmpty()) {
 			status = false;
 			return status; 
@@ -74,13 +74,13 @@ public class SLL<T> {
 	}
 
 	public int compareTo(String a) {
-		int diff = this.compareTo(a);
+		int diff = compareTo(a);
 		return diff;
 	}
 	
 	
 	public int size() {
-		Node<Avenger> counter = this.head;
+		Node<Avenger> counter = head;
 		int count = 0;
 		while (counter != null) {
 			count ++;
@@ -91,135 +91,81 @@ public class SLL<T> {
 	
 	//something bout this one fr
 	public void addInOrderTotal(Node<Avenger> av) {
-		if (this.contains(av)) {
+		if (contains(av)) {
 			return;
 		}
-		// 0
 		if (isEmpty()) {
-			this.addHead(av);
-		}
-		// 1
-		else if (this.size() == 1) {
-			int diff = compareTotal(av, this.getHead(), totalCompare);
-			if (diff > 0) {
-				av.setNext(head);
-				head = av;
-			}
-			else if (diff < 0) {
-				head.setNext(av);
-			}
-			else if (diff == 0) {
-				diff = av.getData().getActor().compareTo(this.getHead().getData().getActor());
-				if (diff > 0) {
-					av.setNext(head);
-					head = av;
-				}
-				else {
-					head.setNext(av);
-				}
-			}
-		}
-		// 2+
+			addHead(av);
+		} 
 		else {
-			Node<Avenger> iterator = this.head;
-			Node<Avenger> previous = null;
-			int diff = compareTotal(av, iterator, totalCompare);
-			while (diff < 0) {
-				previous = iterator;
-				iterator = iterator.getNext();
-				diff = compareTotal(av, iterator, totalCompare);
-			}
-			if (diff > 0) {
-				if (previous != null) {
-					previous.setNext(av);
-					av.setNext(iterator);
+			if (compare(av, head, totalCompare) >= 0)
+				addHead(av);
+			else {
+				Node<Avenger> currentNode = head;
+				while (currentNode.getNext() != null && compare(av, head, totalCompare) < 0) {
+					currentNode = currentNode.getNext();
 				}
-				if (previous == null) {
-					av.setNext(iterator);
-					head = av;
-				}
-			}
-			else if (diff == 0) {
-				diff = av.getData().getActor().compareTo(this.getHead().getData().getActor());
-				if (diff > 0) {
-					previous.setNext(av);
-					av.setNext(iterator);
-				}
-				else {
-					iterator.setNext(av);
+				if (currentNode.getNext() == null) {
+					addTail(av);
+				} else {
+					av.setNext(currentNode.getNext());
+					currentNode.setNext(av);
 				}
 			}
 		}
 	}
 
 	public void addInOrderPerformer(Node<Avenger> av) {
-		if (this.contains(av)) {
+		if (contains(av)) {
 			return;
 		}
-		// 0
 		if (isEmpty()) {
-			this.addHead(av);
-		}
-		// 1
-		else if (this.size() == 1) {
-			int diff = comparePerformer(av, this.getHead(), performerCompare);
-			if (diff > 0) {
-				av.setNext(head);
-				head = av;
-			}
-			else if (diff < 0) {
-				head.setNext(av);
-			}
-			else if (diff == 0) {
-				diff = av.getData().getAlias().compareTo(this.getHead().getData().getAlias());
-				if (diff > 0) {
-					av.setNext(head);
-					head = av;
-				}
-				else {
-					head.setNext(av);
-				}
-			}
-		}
-		// 2+
+			addHead(av);
+		} 
 		else {
-			Node<Avenger> iterator = this.head;
-			Node<Avenger> previous = null;
-			int diff = comparePerformer(av, iterator, performerCompare);
-			while (diff < 0) {
-				previous = iterator;
-				iterator = iterator.getNext();
-				diff = comparePerformer(av, iterator, performerCompare);
-			}
-			if (diff > 0) {
-				if (previous != null) {
-					previous.setNext(av);
-					av.setNext(iterator);
+			if (compare(av, head, performerCompare) >= 0)
+				addHead(av);
+			else {
+				Node<Avenger> currentNode = head;
+				while (currentNode.getNext() != null && compare(av, head, performerCompare) < 0) {
+					currentNode = currentNode.getNext();
 				}
-				if (previous == null) {
-					av.setNext(iterator);
-					head = av;
-				}
-			}
-			else if (diff == 0) {
-				diff = av.getData().getAlias().compareTo(this.getHead().getData().getAlias());
-				if (diff > 0) {
-					previous.setNext(av);
-					av.setNext(iterator);
-				}
-				else {
-					iterator.setNext(av);
+				if (currentNode.getNext() == null) {
+					addTail(av);
+				} else {
+					av.setNext(currentNode.getNext());
+					currentNode.setNext(av);
 				}
 			}
 		}
 	}
 	
-	// maybe creating these works?
-	public int compareTotal(Node<Avenger> a, Node<Avenger> b, totalCompare comparing) {
+	public void addInOrderAlphabetical(Node<Avenger> av) {
+		if (isEmpty()) {
+			addHead(av);
+		} else {
+			if (av.getData().getAlias().compareTo(head.getData().getAlias()) >= 0)
+				addHead(av);
+			else {
+				Node<Avenger> currentNode = head;
+				while (currentNode.getNext() != null && av.getData().getAlias().compareTo(currentNode.getNext().getData().getAlias()) < 0) {
+					currentNode = currentNode.getNext();
+				}
+				if (currentNode.getNext() == null) {
+					addTail(av);
+				} else {
+					av.setNext(currentNode.getNext());
+					currentNode.setNext(av);
+				}
+			}
+		}
+	}
+	
+	public int compare(Node<Avenger> a, Node<Avenger> b, totalCompare comparing) {
 		return comparing.compare(a, b);
 	}
 	
-	public int comparePerformer(Node<Avenger> a, Node<Avenger> b, performerCompare comparing) {
+	public int compare(Node<Avenger> a, Node<Avenger> b, performerCompare comparing) {
 		return comparing.compare(a, b);
 	}
 }

@@ -1,7 +1,6 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
-public class A2 extends SLL {
+public class A2 extends SLL<Avenger> {
  
 	public String[][] avengerRoster = { { "captainamerica", "rogers", "evans" }, { "ironman", "stark", "downey" },
 			{ "blackwidow", "romanoff", "johansson" }, { "hulk", "banner", "ruffalo" },
@@ -48,11 +47,11 @@ public class A2 extends SLL {
 	public void run() {		
 		head = avengersList.getHead();
 		tail = avengersList.getTail();
-		avengersList = readInput(avengersList);
+		avengersList = readInput();
 		printResults(totalWordCount, head, avengersList);
 	}
 
-	public SLL<Avenger> readInput(SLL<Avenger> avengersList) {
+	public SLL<Avenger> readInput() {
 		Scanner input = new Scanner(System.in);
 		while (input.hasNext()) {
 			String word = input.next();
@@ -207,42 +206,27 @@ public class A2 extends SLL {
 		}
 	}
 	
-	public int compareNextAlias(Node<Avenger> av, Node<Avenger> next) {
-		return av.getData().getAlias().compareTo(next.getData().getAlias());
-	}
-	
-	public int compareNextActor(Node<Avenger> av, Node<Avenger> next) {
-		return av.getData().getActor().compareTo(next.getData().getActor());
-	}
-	
 	// prints in order
 	public void printInOrder(SLL<Avenger> list) {
 		 Node<Avenger> iterator = list.getHead();
-		 
-		 // ok current code doesnt trigger this!
-		 if (iterator == null) {
-			 System.out.println("Error");
-		 }
-		 else {
-			 while (iterator != null) {
-				 System.out.println(iterator.toString());
-				 iterator = iterator.getNext();
-			 }
+		 while (iterator != null) {
+			 System.out.println(iterator.toString());
+			 iterator = iterator.getNext();
 		 }
 	}
 	
 	// finds top four, prints
 	public void printTopNAvengers(SLL<Avenger> list) {
 		Node<Avenger> iterator = list.getHead();
-		SLL<Avenger> subList = new SLL<Avenger>();
+		SLL<Avenger> subList1 = new SLL<Avenger>();
 		int max = list.size();
-		while (subList.size() != max) {
-			subList.addInOrderTotal(iterator);
+		while (subList1.size() != max) {
+			subList1.addInOrderTotal(iterator);
 			iterator = iterator.getNext();
 		}
 		
 		int printCount = 0;
-		Node<Avenger> printer = subList.getHead();
+		Node<Avenger> printer = subList1.getHead();
 		while (printer != null && printCount < topN) {
 			System.out.println(printer.toString());
 			printer = printer.getNext();
@@ -253,15 +237,15 @@ public class A2 extends SLL {
 	// finds top four, prints
 	public void printTopNPerformers(SLL<Avenger> list) {
 		Node<Avenger> iterator = list.getHead();
-		SLL<Avenger> subList = new SLL<Avenger>();
+		SLL<Avenger> subList2 = new SLL<Avenger>();
 		int max = list.size();
-		while (subList.size() != max) {
-			subList.addInOrderPerformer(iterator);
+		while (subList2.size() != max) {
+			subList2.addInOrderPerformer(iterator);
 			iterator = iterator.getNext();
 		}
 		
 		int printCount = 0;
-		Node<Avenger> printer = subList.getHead();
+		Node<Avenger> printer = subList2.getHead();
 		while (printer != null && printCount < topN) {
 			System.out.println(printer.toString());
 			printer = printer.getNext();
@@ -272,21 +256,18 @@ public class A2 extends SLL {
 	// sorts, prints alphabetical
 	public void printAlphabetical(SLL<Avenger> list) {
 		Node<Avenger> iterator = list.getHead();
-		SLL<Avenger> subList = new SLL<>();
-		 if (iterator == null ) {
-			 System.out.println("Error");
-		 }
-		 else {
-			while (iterator != null) {
-				subList.addInOrderPerformer(iterator);
-				iterator = iterator.getNext();
-			}
-			Node<Avenger> printIterator = subList.getHead();
-			while (printIterator != null) {
-				System.out.println(printIterator.toString());
-				printIterator = printIterator.getNext();
-			}
-		 }
+		SLL<Avenger> subList3 = new SLL<>();
+		while (iterator != null && subList3.size() != list.size()) {
+			subList3.addInOrderAlphabetical(iterator);
+			iterator = iterator.getNext();
+		}
+		int printCount = 0;
+		Node<Avenger> printer = subList3.getHead();
+		while (printer != null && printCount < list.size()) {
+			System.out.println(printer.toString());
+			printer = printer.getNext();
+			printCount ++;
+		}
 	}
 
 	private void printResults(int totalWordCount, Node<Avenger> head, SLL<Avenger> list) {
@@ -307,7 +288,7 @@ public class A2 extends SLL {
 		System.out.println();
 		
 		System.out.println("All mentioned avengers in alphabetical order:");
-//		printAlphabetical(list);
+		printAlphabetical(list);
 		System.out.println();
 	}
 }
