@@ -21,6 +21,7 @@ public class A2 extends SLL {
 	Avenger[] possibleAvengers = { cptAmerica, ironMan, blackWidow, hulk, blackPan, thor, hawkEye, warMachine,
 			spiderMan, winterSoldier };
 	
+	// Avenger objects
 	private Node<Avenger> captainAmericaNode = new Node<Avenger>(cptAmerica);
 	private Node<Avenger> ironManNode = new Node<Avenger>(ironMan);
 	private Node<Avenger> blackWidowNode = new Node<Avenger>(blackWidow);
@@ -39,13 +40,18 @@ public class A2 extends SLL {
 	int totalWordCount = 0;
 	int topN = 4;
 	
+	/**
+	 * Creates an instance of the A2 class and starts processing of input text
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		A2 manager = new A2();
 		manager.run();		
 	}
 
 	/**
-	 * runs the program
+	 * Runs the programs processing the input text and printing the results
 	 * 
 	 */
 	public void run() {		
@@ -54,7 +60,6 @@ public class A2 extends SLL {
 		avengersList = readInput(avengersList);
 		printResults2(totalWordCount, head, avengersList);
 	}
-
 	
 	/**
 	 * read the input of the text file and cleans each word
@@ -212,11 +217,11 @@ public class A2 extends SLL {
 
 
 	/**
-	 * adds to given list if the avenger isn't in it
-	 * 
-	 * @param list
-	 * @param av
-	 * @return
+	 * Checks if a given Avenger node is present in the linked list and adds it to the list if not found.
+	 *
+	 * @param list The linked list of Avengers to check
+	 * @param av The Avenger node to be checked and added
+	 * @return The modified linked list with the Avenger node added if wasn't present
 	 */
 	public SLL<Avenger> checkList(SLL<Avenger> list, Node<Avenger> av) {	
 		if (list.contains(av)) {
@@ -227,17 +232,9 @@ public class A2 extends SLL {
 			return list;
 		}
 	}
-
-	public int compareNextAlias(Node<Avenger> av, Node<Avenger> next) {
-		return av.getData().getAlias().compareTo(next.getData().getAlias());
-	}
-	
-	public int compareNextActor(Node<Avenger> av, Node<Avenger> next) {
-		return av.getData().getActor().compareTo(next.getData().getActor());
-	}
 	
 	/**
-	 * prints the results of the avengers list by the order appeared, most popular avengers,
+	 * Prints the results of the avengers list by the order appeared, most popular avengers,
 	 * most popular performers, and alphabetical mentions
 	 * 
 	 * @param totalWordCount
@@ -258,18 +255,25 @@ public class A2 extends SLL {
 	    System.out.println();
 
 	    System.out.println("Top 4 most popular avengers:");
-	    printTopNAvengers2(list);
+	    printTopNAvengers(list);
 	    System.out.println();
 
 	    System.out.println("Top 4 most popular performers:");
-	    printTopNPerformers2(list);
+	    printTopNPerformers(list);
 	    System.out.println();
 
 	    System.out.println("All mentioned avengers in alphabetical order:");
-	    printAlphabetical2(list.getHead()); // Print alphabetical list
+	    printAlphabetical(list.getHead()); // Print alphabetical list
 	    System.out.println();
 	}
 
+	/**
+	 * Inserts an Avenger node into a linked list of Avengers, ordered by their actor count
+	 *
+	 * @param list The linked list of Avengers where the node should be inserted
+	 * @param av The Avenger node to be inserted into the list
+	 * @return The modified linked list with the Avenger node added in the correct position
+	 */
 	public SLL<Avenger> addInOrderActorCount(SLL<Avenger> list, Node<Avenger> av) {
 	    Node<Avenger> current = list.getHead();
 	    Node<Avenger> previous = null;
@@ -289,6 +293,13 @@ public class A2 extends SLL {
 
 	    return list;
 	}
+	
+	/**
+	 * Sorts a linked list of Avengers by their actor count in ascending order
+	 *
+	 * @param list The linked list of Avengers to be sorted
+	 * @return A new linked list with Avengers sorted by actor count in ascending order
+	 */
 	public SLL<Avenger> sortAvengersByActorCount(SLL<Avenger> list) {
 	    SLL<Avenger> sortedList = new SLL<>();
 	    Node<Avenger> iterator = list.getHead();
@@ -303,10 +314,14 @@ public class A2 extends SLL {
 	    return sortedList;  // Return the sorted list
 	}
 
-
-	
-
-	public Node<Avenger> addInOrderAlphabetical2(Node<Avenger> head, Node<Avenger> av) {
+	/**
+	 * Inserts an Avenger node into a linked list of Avengers in alphabetical order of their aliases
+	 *
+	 * @param head The head of the linked list where the node should be inserted
+	 * @param av The Avenger node to be inserted into the list
+	 * @return The modified linked list with the Avenger node added in the correct alphabetical position
+	 */
+	public Node<Avenger> addInOrderAlphabetical(Node<Avenger> head, Node<Avenger> av) {
 	    if (head == null || av.getData().getAlias().compareTo(head.getData().getAlias()) <= 0) {
 	        av.setNext(head);
 	        return av;
@@ -321,8 +336,12 @@ public class A2 extends SLL {
 	    }
 	}
 
-	// Implement the printing methods
-	public void printTopNAvengers2(SLL<Avenger> list) {
+	/**
+	 * Prints the topN most popular Avengers based on the order they appear in the list
+	 *
+	 * @param list The linked list of Avengers to be printed
+	 */
+	public void printTopNAvengers(SLL<Avenger> list) {
 	    Node<Avenger> iterator = list.getHead();
 	    int printCount = 0;
 
@@ -333,7 +352,12 @@ public class A2 extends SLL {
 	    }
 	}
 
-	public void printTopNPerformers2(SLL<Avenger> list) {
+	/**
+	 * Prints the topN most popular Avengers based on the actor count in ascending order
+	 *
+	 * @param list The linked list of Avengers to be printed
+	 */
+	public void printTopNPerformers(SLL<Avenger> list) {
 	    SLL<Avenger> sortedList = sortAvengersByActorCount(list);
 	    
 	    Node<Avenger> iterator = sortedList.getHead();
@@ -346,8 +370,13 @@ public class A2 extends SLL {
 	    }
 	}
 
-
-	public Node<Avenger> printAlphabetical2(Node<Avenger> head) {
+	/**
+	 * Prints all the Avengers in the linked list in alphabetical order of their aliases
+	 *
+	 * @param head The head of the linked list to be printed alphabetically
+	 * @return The head of the linked list after printing
+	 */
+	public Node<Avenger> printAlphabetical(Node<Avenger> head) {
 	    Node<Avenger> sortedList = null;
 	    Node<Avenger> iterator = head;
 
@@ -355,7 +384,7 @@ public class A2 extends SLL {
 	        Node<Avenger> current = iterator;
 	        iterator = iterator.getNext();
 	        current.setNext(null);  // Disconnect the current node from the rest of the list
-	        sortedList = addInOrderAlphabetical2(sortedList, current);
+	        sortedList = addInOrderAlphabetical(sortedList, current);
 	    }
 
 	    // Print the avengers in alphabetical order
