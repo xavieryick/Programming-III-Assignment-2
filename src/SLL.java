@@ -95,13 +95,25 @@ public class SLL<T> {
 	        return av;
 	    } else {
 	        Node<Avenger> current = head;
-	        while (current.getNext() != null && totalCompare.compare(av, head) < 0) {
+	        while (current.getNext() != null && totalCompare.compare(av, current) < 0) {
 	            current = current.getNext();
 	        }
-	        av.setNext(current.getNext());
-	        current.setNext(av);
-	        return head;
+	        if (current.getNext() != null && totalCompare.compare(av, current) > 0) {
+		        av.setNext(current.getNext());
+		        current.setNext(av);
+	        }
+	        else if (current.getNext() != null && totalCompare.compare(av, current) == 0) {
+	        	int diff = av.getData().getActor().compareTo(current.getData().getActor());
+	        	if (diff > 0) {
+	        		av.setNext(current.getNext());
+			        current.setNext(av);
+	        	}
+	        	else {
+	        		current.setNext(av);
+	        	}
+	        }
 	    }
+	    return head;
 	}
 
 	public Node<Avenger> addInOrderPerformer(Node<Avenger> head, Node<Avenger> av) {
@@ -110,13 +122,25 @@ public class SLL<T> {
 	        return av;
 	    } else {
 	        Node<Avenger> current = head;
-	        while (current.getNext() != null && performerCompare.compare(av, head) < 0) {
+	        while (current.getNext() != null && performerCompare.compare(av, current) < 0) {
 	            current = current.getNext();
 	        }
-	        av.setNext(current.getNext());
-	        current.setNext(av);
-	        return head;
+	        if (current.getNext() != null && performerCompare.compare(av, current) > 0) {
+		        av.setNext(current.getNext());
+		        current.setNext(av);
+	        }
+	        else if (current.getNext() != null && performerCompare.compare(av, current) == 0) {
+	        	int diff = av.getData().getAlias().compareTo(current.getData().getAlias());
+	        	if (diff > 0) {
+	        		av.setNext(current.getNext());
+			        current.setNext(av);
+	        	}
+	        	else {
+	        		current.setNext(av);
+	        	}
+	        }
 	    }
+	    return head;
 	}
 	
 	public Node<Avenger> addInOrderAlphabetical(Node<Avenger> head, Node<Avenger> av) {

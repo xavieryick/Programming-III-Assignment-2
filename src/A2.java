@@ -230,7 +230,6 @@ public class A2 extends SLL<Avenger> {
 	        sortedList = addInOrderTotal(sortedList, current);
 	    }
 
-	    // Print the avengers in alphabetical order
 	    int printCounter = 0;
 	    Node<Avenger> totalIterator = sortedList;
 	    while (totalIterator != null && printCounter < topN) {
@@ -254,7 +253,6 @@ public class A2 extends SLL<Avenger> {
 	        sortedList = addInOrderPerformer(sortedList, current);
 	    }
 
-	    // Print the avengers in alphabetical order
 	    int printCounter = 0;
 	    Node<Avenger> performerIterator = sortedList;
 	    while (performerIterator != null && printCounter < topN) {
