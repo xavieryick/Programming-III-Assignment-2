@@ -254,12 +254,10 @@ public class A2 extends SLL {
 	public void printTopNPerformers(SLL<Avenger> list) {
 		Node<Avenger> iterator = list.getHead();
 		SLL<Avenger> subList = new SLL<Avenger>();
-		int count = 0;
 		int max = list.size();
-		while (count != max) {
+		while (subList.size() != max) {
 			subList.addInOrderPerformer(iterator);
 			iterator = iterator.getNext();
-			count ++;
 		}
 		
 		int printCount = 0;
@@ -305,7 +303,7 @@ public class A2 extends SLL {
 		System.out.println();
 
 		System.out.println("Top " + topN + " most popular performers:");
-//		printTopNPerformers(list);
+		printTopNPerformers(list);
 		System.out.println();
 		
 		System.out.println("All mentioned avengers in alphabetical order:");

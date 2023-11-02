@@ -108,7 +108,7 @@ public class SLL<T> {
 			else if (diff < 0) {
 				head.setNext(av);
 			}
-			else if (diff == 0) { // ???
+			else if (diff == 0) {
 				diff = av.getData().getActor().compareTo(this.getHead().getData().getActor());
 				if (diff > 0) {
 					av.setNext(head);
@@ -139,7 +139,7 @@ public class SLL<T> {
 					head = av;
 				}
 			}
-			else if (diff == 0) { // ???
+			else if (diff == 0) {
 				diff = av.getData().getActor().compareTo(this.getHead().getData().getActor());
 				if (diff > 0) {
 					previous.setNext(av);
@@ -170,7 +170,7 @@ public class SLL<T> {
 			else if (diff < 0) {
 				head.setNext(av);
 			}
-			else if (diff == 0) { // ???
+			else if (diff == 0) {
 				diff = av.getData().getAlias().compareTo(this.getHead().getData().getAlias());
 				if (diff > 0) {
 					av.setNext(head);
@@ -201,7 +201,7 @@ public class SLL<T> {
 					head = av;
 				}
 			}
-			else if (diff == 0) { // ???
+			else if (diff == 0) {
 				diff = av.getData().getAlias().compareTo(this.getHead().getData().getAlias());
 				if (diff > 0) {
 					previous.setNext(av);
@@ -222,8 +222,4 @@ public class SLL<T> {
 	public int comparePerformer(Node<Avenger> a, Node<Avenger> b, performerCompare comparing) {
 		return comparing.compare(a, b);
 	}
-	
-//	public int compareAlias(Node<Avenger> a, Node<Avenger> b, aliasCompare comparing) {
-//		return comparing.compare(a, b);
-//	}
 }
