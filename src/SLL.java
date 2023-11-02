@@ -43,6 +43,10 @@ public class SLL<T> {
 		return this.head;
 	}
 	
+    public void setHead(Node<Avenger> head) {
+        this.head = head;
+    }
+	
 	public Node<Avenger> getTail() {
 		return this.tail;
 	}

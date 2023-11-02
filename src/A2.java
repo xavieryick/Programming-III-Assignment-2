@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class A2 extends SLL {
@@ -45,29 +44,44 @@ public class A2 extends SLL {
 		manager.run();		
 	}
 
+	/**
+	 * runs the program
+	 * 
+	 */
 	public void run() {		
 		head = avengersList.getHead();
 		tail = avengersList.getTail();
 		avengersList = readInput(avengersList);
-		printResults(totalWordCount, head, avengersList);
+		printResults2(totalWordCount, head, avengersList);
 	}
 
+	
+	/**
+	 * read the input of the text file and cleans each word
+	 * 
+	 * @param avengersList
+	 * @return
+	 */
 	public SLL<Avenger> readInput(SLL<Avenger> avengersList) {
-		Scanner input = new Scanner(System.in);
-		while (input.hasNext()) {
-			String word = input.next();
-			word = word.trim().toLowerCase().split("'")[0].replaceAll("[^\\\\sa-zA-Z]", "");
-			if (word.length() != 0) {
-				totalWordCount++;
-				avengersList = matchIncrement(word, avengersList);
-			}
-		}
-		input.close();
-		return avengersList;
+	    Scanner input = new Scanner(System.in);
+	    while (input.hasNext()) {
+	        String word = input.next();
+	        word = word.trim().toLowerCase().split("'")[0].replaceAll("[^\\\\sa-zA-Z]", "");
+	        if (word.length() != 0) {
+	            totalWordCount++;
+	            avengersList = matchIncrement(word, avengersList);
+	        }
+	    }
+	    input.close();
+	    return avengersList;
 	}
 
-	/*
-	 * Matching and incrementing each Avenger's counts
+	/**
+	 * matches and increments each Avenger's counts
+	 * 
+	 * @param word
+	 * @param list
+	 * @return
 	 */
 	public SLL<Avenger> matchIncrement(String word, SLL<Avenger> list) {	
 		if (word.equals(avengerRoster[0][0]) || word.equals(avengerRoster[0][1]) || word.equals(avengerRoster[0][2])) {
@@ -196,7 +210,14 @@ public class A2 extends SLL {
 		return list;
 	}
 
-	// adds to given list if given avenger isnt in it
+
+	/**
+	 * adds to given list if the avenger isn't in it
+	 * 
+	 * @param list
+	 * @param av
+	 * @return
+	 */
 	public SLL<Avenger> checkList(SLL<Avenger> list, Node<Avenger> av) {	
 		if (list.contains(av)) {
 			return list;
@@ -204,154 +225,6 @@ public class A2 extends SLL {
 		else {
 			list.addTail(av);
 			return list;
-		}
-	}
-	
-	// change to return list
-	public SLL<Avenger> addInOrderTotal(SLL<Avenger> list, Node<Avenger> av) {
-		SLL<Avenger> subList = list;
-		// check if 0
-		if (list.getHead() == null) {
-			subList.addHead(av);
-		}
-		// check if 1
-		else if (list.getHead().getNext() == null) {
-			int headTotal = list.getHead().getData().getTotalCount();
-			int avTotal = av.getData().getTotalCount();
-			
-			// av count > head count
-			if (avTotal > headTotal) {
-				subList.addHead(av);
-			}
-			// av count < head count
-			else if (avTotal < headTotal) {
-				subList.addTail(av);
-			}
-			// av count == head count
-			else {
-				// if avActor > headActor
-				if (av.getData().compareTo(head.getData()) > 0) {
-					subList.addHead(av);
-				}
-				// if avActor < headActor
-				else if (av.getData().compareTo(head.getData()) < 0) {
-					subList.addTail(av);
-				}
-			}
-		}
-		else { // fix this
-			
-			/*
-			 * if list of 1-2-3-4-5, 4 will only have resultNext, and 5 will have none
-			 * 1) resultNext, resultNextNext
-			 * 2) resultNext, resultNextNext
-			 * 3) resultNext, resultNextNext
-			 * 4) resultNext, n/a
-			 * 5) n/a, n/a
-			 * fix to cover second last and last nodes
-			 */
-			Node<Avenger> iterator = subList.getHead();
-			Node<Avenger> next = iterator.getNext();
-			Node<Avenger> nextNext = iterator.getNext().getNext();
-			int resultNext = iterator.getData().getTotalCount() - next.getData().getTotalCount();
-			int resultNextNext = iterator.getData().getTotalCount() - nextNext.getData().getTotalCount();
-			
-			while ((resultNext > 0 && resultNextNext > 0) || (resultNext < 0 && resultNextNext < 0) || (resultNext < 0 && resultNextNext > 0)) {
-				iterator = iterator.getNext();
-				next = next.getNext();
-				nextNext = nextNext.getNext();
-				resultNext = iterator.getData().getTotalCount() - next.getData().getTotalCount();
-				resultNextNext = iterator.getData().getTotalCount() - nextNext.getData().getTotalCount();
-			}
-			next.setNext(iterator);
-			iterator.setNext(nextNext);
-		}
-		return subList;
-	}
-	
-	//change to return list
-	public void addInOrderActor(Node<Avenger> head, Node<Avenger> av) {
-		// check if 0
-		if (head == null) {
-			head = av;
-		}
-		// check if 1
-		else if (head.getNext() == null) {
-			int headActor = head.getData().getActorCount();
-			int avActor = av.getData().getActorCount();
-			
-			// av count > head count
-			if (avActor > headActor) {
-				head = av;
-			}
-			// av count < head count
-			else if (avActor < headActor) {
-				tail = av;
-			}
-			// av count == head count
-			else {
-				// if avActor > headActor
-				if (av.getData().compareTo(head.getData()) > 0) {
-					head = av;
-				}
-				// if avActor < headActor
-				else if (av.getData().compareTo(head.getData()) < 0) {
-					tail = av;
-				}
-			}
-		}
-		else {
-			Node<Avenger> iterator = head;
-			Node<Avenger> next = iterator.getNext();
-			Node<Avenger> nextNext = iterator.getNext().getNext();
-			int resultNext = compareNextActor(iterator, next);
-			int resultNextNext = compareNextActor(iterator, nextNext);
-			
-			while ((resultNext > 0 && resultNextNext > 0) || (resultNext < 0 && resultNextNext < 0) || (resultNext < 0 && resultNextNext > 0)) {
-				iterator = iterator.getNext();
-				next = next.getNext();
-				nextNext = nextNext.getNext();
-				resultNext = compareNextActor(iterator, next);
-				resultNextNext = compareNextActor(iterator, nextNext);
-			}
-			next.setNext(iterator);
-			iterator.setNext(nextNext);
-		}
-	}
-
-	//change to return list
-	public void addInOrderAlphabetical(Node<Avenger> head, Node<Avenger> av) {
-		// check if 0
-		if (head == null) {
-			head = av;
-		}
-		// check if 1
-		else if (head.getNext() == null) {
-			// av > head
-			if (av.getData().getAlias().compareTo(head.getData().getActor()) > 0) {
-				head = av;
-			}
-			// av < head
-			else if (av.getData().getAlias().compareTo(head.getData().getActor()) < 0) {
-				tail = av;
-			}
-		}
-		else {
-			Node<Avenger> iterator = head;
-			Node<Avenger> next = iterator.getNext();
-			Node<Avenger> nextNext = iterator.getNext().getNext();
-			int resultNext = compareNextAlias(iterator, next);
-			int resultNextNext = compareNextAlias(iterator, nextNext);
-			
-			while ((resultNext > 0 && resultNextNext > 0) || (resultNext < 0 && resultNextNext < 0) || (resultNext < 0 && resultNextNext > 0)) {
-				iterator = iterator.getNext();
-				next = next.getNext();
-				nextNext = nextNext.getNext();
-				resultNext = compareNextAlias(iterator, next);
-				resultNextNext = compareNextAlias(iterator, nextNext);
-			}
-			next.setNext(iterator);
-			iterator.setNext(nextNext);
 		}
 	}
 
@@ -363,100 +236,130 @@ public class A2 extends SLL {
 		return av.getData().getActor().compareTo(next.getData().getActor());
 	}
 	
-	// prints in order
-	public void printInOrder(SLL<Avenger> list) {
-		 Node<Avenger> iterator = list.getHead();
-		 
-		 // ok current code doesnt trigger this!
-		 if (iterator == null) {
-			 System.out.println("Error");
-		 }
-		 else {
-			 while (iterator != null) {
-				 System.out.println(iterator.toString());
-				 iterator = iterator.getNext();
-			 }
-		 }
-	}
-	
-	// finds top four, prints
-	public void printTopNAvengers(SLL<Avenger> list) {
-		Node<Avenger> iterator = list.getHead();
-		SLL<Avenger> subList = new SLL<Avenger>();
-		int count = 0;
-		int max = list.size();
-		while (count < max) {
-			subList = subList.addInOrderTotal(iterator);
-			iterator = iterator.getNext();
-			count ++;
-		}
-		
-		int printCount = 0;
-		Node<Avenger> printer = subList.getHead();
-		while (printer != null && printCount < topN) {
-			System.out.println(printer.toString());
-			printer = printer.getNext();
-			printCount ++;
-		}
-	}
-	
-	// finds top four, prints
-	public void printTopNPerformers(SLL<Avenger> list) {
-		Node<Avenger> iterator = list.getHead();
-		SLL<Avenger> subList = new SLL<Avenger>();
-		int count = 0;
-		while (count < list.size()) {
-			subList.addInOrderPerformer(iterator);
-			count ++;
-		}
-		
-		int printCount = 0;
-		Node<Avenger> printer = subList.getHead();
-		while (printer != null && printCount < topN) {
-			System.out.println(printer.toString());
-			printer = printer.getNext();
-			printCount ++;
-		}
-	}
-	
-	// sorts, prints alphabetical
-	public void printAlphabetical(Node<Avenger> head) {
-		Node<Avenger> iterator = head;
-		SLL<Avenger> list = new SLL<>();
-		// iterates through totalList, adds everything to list in order
-		 if (iterator == null ) {
-			 System.out.println("Error");
-		 }
-		 else {
-			while (iterator.getNext() != null) {
-				addInOrderActor(head, iterator);
-				iterator = iterator.getNext();
-			}
-			while (iterator.getNext() != null) {
-				System.out.println(iterator.toString());
-			}
-		 }
+	/**
+	 * prints the results of the avengers list by the order appeared, most popular avengers,
+	 * most popular performers, and alphabetical mentions
+	 * 
+	 * @param totalWordCount
+	 * @param head
+	 * @param list
+	 */
+	private void printResults2(int totalWordCount, Node<Avenger> head, SLL<Avenger> list) {
+	    System.out.println("Total number of words: " + totalWordCount);
+	    System.out.println("Number of Avengers Mentioned: " + list.size());
+	    System.out.println();
+
+	    System.out.println("All avengers in the order they appeared in the input stream:");
+	    Node<Avenger> iterator = list.getHead();
+	    while (iterator != null) {
+	        System.out.println(iterator.toString());
+	        iterator = iterator.getNext();
+	    }
+	    System.out.println();
+
+	    System.out.println("Top 4 most popular avengers:");
+	    printTopNAvengers2(list);
+	    System.out.println();
+
+	    System.out.println("Top 4 most popular performers:");
+	    printTopNPerformers2(list);
+	    System.out.println();
+
+	    head = printAlphabetical2(head); // Update 'head' with the sorted list
+	    System.out.println("All mentioned avengers in alphabetical order:");
+	    printAlphabetical2(head);
+	    System.out.println();
 	}
 
-	private void printResults(int totalWordCount, Node<Avenger> head, SLL<Avenger> list) {
-		System.out.println("Total number of words: " + totalWordCount);
-		System.out.println("Number of Avengers Mentioned: " + list.size());
-		System.out.println();
-		
-		System.out.println("All avengers in the order they appeared in the input stream:");
-		printInOrder(list);
-		System.out.println();
-		
-		System.out.println("Top " + topN + " most popular avengers:");
-		printTopNAvengers(list);
-		System.out.println();
+	// Implement the sorting methods (uncomment and complete the methods)
+	public SLL<Avenger> addInOrderTotal2(SLL<Avenger> list, Node<Avenger> av) {
+	    Node<Avenger> current = list.getHead();
+	    Node<Avenger> previous = null;
 
-		System.out.println("Top " + topN + " most popular performers:");
-//		printTopNPerformers(list);
-		System.out.println();
-		
-		System.out.println("All mentioned avengers in alphabetical order:");
-//		printAlphabetical(head);
-		System.out.println();
+	    while (current != null && av.getData().getTotalCount() <= current.getData().getTotalCount()) {
+	        previous = current;
+	        current = current.getNext();
+	    }
+
+	    if (previous == null) {
+	        av.setNext(list.getHead());
+	        list.setHead(av);
+	    } else {
+	        previous.setNext(av);
+	        av.setNext(current);
+	    }
+
+	    return list;
 	}
+
+	public void addInOrderActor2(Node<Avenger> head, Node<Avenger> av) {
+	    Node<Avenger> current = head;
+	    Node<Avenger> previous = null;
+
+	    while (current != null && av.getData().getActorCount() <= current.getData().getActorCount()) {
+	        previous = current;
+	        current = current.getNext();
+	    }
+
+	    if (previous == null) {
+	        av.setNext(head);
+	        head = av;
+	    } else {
+	        previous.setNext(av);
+	        av.setNext(current);
+	    }
+	}
+
+	public Node<Avenger> addInOrderAlphabetical2(Node<Avenger> head, Node<Avenger> av) {
+	    if (head == null || av.getData().getAlias().compareTo(head.getData().getAlias()) <= 0) {
+	        av.setNext(head);
+	        return av;
+	    } else {
+	        Node<Avenger> current = head;
+	        while (current.getNext() != null && av.getData().getAlias().compareTo(current.getNext().getData().getAlias()) > 0) {
+	            current = current.getNext();
+	        }
+	        av.setNext(current.getNext());
+	        current.setNext(av);
+	        return head;
+	    }
+	}
+
+	// Implement the printing methods
+	public void printTopNAvengers2(SLL<Avenger> list) {
+	    Node<Avenger> iterator = list.getHead();
+	    int printCount = 0;
+
+	    while (iterator != null && printCount < topN) {
+	        System.out.println(iterator.toString());
+	        iterator = iterator.getNext();
+	        printCount++;
+	    }
+	}
+
+	public void printTopNPerformers2(SLL<Avenger> list) {
+	    Node<Avenger> iterator = list.getHead();
+	    int printCount = 0;
+
+	    while (iterator != null && printCount < topN) {
+	        System.out.println(iterator.toString());
+	        iterator = iterator.getNext();
+	        printCount++;
+	    }
+	}
+
+	public Node<Avenger> printAlphabetical2(Node<Avenger> head) {
+	    Node<Avenger> sortedList = null;
+	    Node<Avenger> iterator = head;
+
+	    while (iterator != null) {
+	        Node<Avenger> current = iterator;
+	        iterator = iterator.getNext();
+	        current.setNext(null);  // Disconnect the current node from the rest of the list
+	        sortedList = addInOrderAlphabetical2(sortedList, current);
+	    }
+
+	    return sortedList;  // Return the sorted list
+	}
+
 }
