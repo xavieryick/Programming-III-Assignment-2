@@ -10,9 +10,6 @@ public class totalCompare implements Comparator<Node<Avenger>>{
 		 */
 		public int compare(Node<Avenger>  a, Node<Avenger> b) {
 			int diff = a.getData().getTotalCount() - b.getData().getTotalCount();
-			if (diff == 0) {
-				return a.getData().getActor().compareTo(b.getData().getActor());
-			}
 			return diff;
 		}
 	}
