@@ -248,9 +248,9 @@ public class A2 extends SLL<Avenger> {
 	 *
 	 * @param list The linked list of Avengers to be printed
 	 */
-	public Node<Avenger> printTopNAvengers(Node<Avenger> head) {
+	public Node<Avenger> printTopNAvengers(Node<Avenger> node) {
 	    Node<Avenger> sortedList = null;
-	    Node<Avenger> iterator = head;
+	    Node<Avenger> iterator = node;
 
 	    while (iterator != null) {
 	        Node<Avenger> current = iterator;
@@ -259,12 +259,13 @@ public class A2 extends SLL<Avenger> {
 	        sortedList = addInOrderTotal(sortedList, current);
 	    }
 
-	    int printCounter = 0;
+	    // Print the avengers in alphabetical order
 	    Node<Avenger> totalIterator = sortedList;
-	    while (totalIterator != null && printCounter < topN) {
+	    int count = 0;
+	    while (totalIterator != null && count < topN) {
 	        System.out.println(totalIterator.toString());
 	        totalIterator = totalIterator.getNext();
-	        printCounter ++;
+	        count++;
 	    }
 
 	    return sortedList;  // Return the sorted list
@@ -275,9 +276,9 @@ public class A2 extends SLL<Avenger> {
 	 *
 	 * @param list The linked list of Avengers to be printed
 	 */
-	public Node<Avenger> printTopNPerformers(Node<Avenger> head) {
+	public Node<Avenger> printTopNPerformers(Node<Avenger> node) {
 	    Node<Avenger> sortedList = null;
-	    Node<Avenger> iterator = head;
+	    Node<Avenger> iterator = node;
 
 	    while (iterator != null) {
 	        Node<Avenger> current = iterator;
@@ -286,12 +287,13 @@ public class A2 extends SLL<Avenger> {
 	        sortedList = addInOrderPerformer(sortedList, current);
 	    }
 
-	    int printCounter = 0;
+	    // Print the avengers in alphabetical order
 	    Node<Avenger> performerIterator = sortedList;
-	    while (performerIterator != null && printCounter < topN) {
+	    int count = 0;
+	    while (performerIterator != null && count < topN) {
 	        System.out.println(performerIterator.toString());
 	        performerIterator = performerIterator.getNext();
-	        printCounter ++;
+	        count++;
 	    }
 
 	    return sortedList;  // Return the sorted list
@@ -325,15 +327,14 @@ public class A2 extends SLL<Avenger> {
 	}
 
 	private SLL<Avenger> copy(SLL<Avenger> list) {
-		SLL<Avenger> copiedList = new SLL<Avenger>();
+		SLL<Avenger> copy = new SLL<Avenger>();
 		Node<Avenger> current = list.getHead();
 		
 		while (current != null) {
-			Node<Avenger> nodeToAdd = new Node<Avenger>(current.getData());
-			copiedList.addTail(nodeToAdd);
+			copy.addTail(new Node<Avenger>(current.getData()));
 			current = current.getNext();
 		}
-		return copiedList;
+		return copy;
 	}
 	
 	/**
